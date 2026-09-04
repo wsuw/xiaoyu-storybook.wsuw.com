@@ -1,56 +1,50 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { AndScene } from './AndScene';
-import { FORMULA_STORIES } from '../FormulaStoryData';
-
-const storyData = FORMULA_STORIES.find((s) => s.id === 'and')!;
+import { AndDefinition } from './AndDefinition';
+import { AndStoryScene } from './AndStoryScene';
 
 const meta = {
   title: '公式/逻辑与条件/and 逻辑与',
-  component: AndScene,
   parameters: {
     layout: 'fullscreen',
   },
-  argTypes: {
-    val1: {
-      name: storyData.paramDef.label,
-      control: {
-        type: 'range',
-        min: storyData.paramDef.min,
-        max: storyData.paramDef.max,
-        step: storyData.paramDef.step,
-      },
-      description: '实时调节参数 1，驱动 3D 模型变化',
-    },
-    val2: {
-      name: storyData.paramDef2!.label,
-      control: {
-        type: 'range',
-        min: storyData.paramDef2!.min,
-        max: storyData.paramDef2!.max,
-        step: storyData.paramDef2!.step,
-      },
-      description: '实时调节参数 2，驱动 3D 模型变化',
-    },
-  },
-} satisfies Meta<typeof AndScene>;
+} satisfies Meta;
 
 export default meta;
-type Story = StoryObj<typeof meta>;
 
-// Story 1: 公式定义与功能说明
-export const 公式定义: Story = {
+// Story 1: 公式定义与说明 (独立组件，无参数输入干扰)
+export const 公式定义: StoryObj = {
   name: '1. 公式定义与说明',
-  args: {
-    mode: 'definition',
-  },
+  render: () => <AndDefinition />,
 };
 
-// Story 2: 3D 场景故事与参数实时交互
-export const 故事演练: Story = {
+// Story 2: 3D 故事与交互演练 (独立 3D 场景组件，参数在 Storybook Controls 中随意修改)
+export const 故事演练: StoryObj = {
   name: '2. 3D 故事与交互演练',
-  args: {
-    mode: 'story',
-    val1: storyData.paramDef.defaultVal,
-    val2: storyData.paramDef2!.defaultVal,
+  argTypes: {
+    w: {
+      name: '书架总宽 (#W)',
+      control: {
+        type: 'range',
+        min: 400,
+        max: 900,
+        step: 20,
+      },
+      description: '书架总宽 (#W)，在 Storybook Controls 中实时修改此值即可驱动 3D 变化',
+    },
+    d: {
+      name: '书架进深 (#D)',
+      control: {
+        type: 'range',
+        min: 250,
+        max: 500,
+        step: 10,
+      },
+      description: '书架进深 (#D)，在 Storybook Controls 中实时修改此值即可驱动 3D 变化',
+    },
   },
+  args: {
+    w: 680,
+    d: 420,
+  },
+  render: (args) => <AndStoryScene {...args} />,
 };

@@ -4,7 +4,7 @@ import reactLogo from './assets/react.svg'
 import viteLogo from './assets/vite.svg'
 import './App.css'
 
-import { IfScene } from './stories/parametric-formula/IfScene'
+import { IfStoryScene } from './stories/parametric-formula/if/IfStoryScene'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -12,7 +12,7 @@ function App() {
   return (
     <>
       <div style={{ padding: '24px', maxWidth: '1000px', margin: '0 auto' }}>
-        <IfScene />
+        <IfStoryScene />
       </div>
 
 

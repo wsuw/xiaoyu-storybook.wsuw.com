@@ -1,47 +1,39 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { OrScene } from './OrScene';
-import { FORMULA_STORIES } from '../FormulaStoryData';
-
-const storyData = FORMULA_STORIES.find((s) => s.id === 'or')!;
+import { OrDefinition } from './OrDefinition';
+import { OrStoryScene } from './OrStoryScene';
 
 const meta = {
   title: '公式/逻辑与条件/or 逻辑或',
-  component: OrScene,
   parameters: {
     layout: 'fullscreen',
   },
-  argTypes: {
-    val1: {
-      name: storyData.paramDef.label,
-      control: {
-        type: 'range',
-        min: storyData.paramDef.min,
-        max: storyData.paramDef.max,
-        step: storyData.paramDef.step,
-      },
-      description: '实时调节参数 1，驱动 3D 模型变化',
-    },
-    
-  },
-} satisfies Meta<typeof OrScene>;
+} satisfies Meta;
 
 export default meta;
-type Story = StoryObj<typeof meta>;
 
-// Story 1: 公式定义与功能说明
-export const 公式定义: Story = {
+// Story 1: 公式定义与说明 (独立组件，无参数输入干扰)
+export const 公式定义: StoryObj = {
   name: '1. 公式定义与说明',
-  args: {
-    mode: 'definition',
-  },
+  render: () => <OrDefinition />,
 };
 
-// Story 2: 3D 场景故事与参数实时交互
-export const 故事演练: Story = {
+// Story 2: 3D 故事与交互演练 (独立 3D 场景组件，参数在 Storybook Controls 中随意修改)
+export const 故事演练: StoryObj = {
   name: '2. 3D 故事与交互演练',
-  args: {
-    mode: 'story',
-    val1: storyData.paramDef.defaultVal,
-    
+  argTypes: {
+    h: {
+      name: '柜体高度 (#H)',
+      control: {
+        type: 'range',
+        min: 1800,
+        max: 2800,
+        step: 50,
+      },
+      description: '柜体高度 (#H)，在 Storybook Controls 中实时修改此值即可驱动 3D 变化',
+    },
   },
+  args: {
+    h: 2500,
+  },
+  render: (args) => <OrStoryScene {...args} />,
 };

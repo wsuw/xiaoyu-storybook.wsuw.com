@@ -1,0 +1,10 @@
+<style>
+  /* 隐藏左侧栏顶部设置齿轮按钮 (Settings menu button) */
+  button[aria-label="Settings"],
+  button[aria-label="About Storybook"],
+  a[aria-label="About Storybook"],
+  a[href*="/settings/about"],
+  .sidebar-header button:has(svg) {
+    display: none !important;
+  }
+</style>
