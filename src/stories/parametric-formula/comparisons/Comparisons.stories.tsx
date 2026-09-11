@@ -1,6 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { ComparisonsDefinition } from './ComparisonsDefinition';
 import { ComparisonsStoryScene } from './ComparisonsStoryScene';
+import { FormulaPracticeQuiz } from '../common/FormulaPracticeQuiz';
+import { comparisonsQuizData } from './comparisonsQuizData';
 
 const meta = {
   title: '公式/逻辑与条件/数值区间比较 (<, >, <=, >=)',
@@ -36,4 +38,10 @@ export const 故事演练: StoryObj = {
     h: 1600,
   },
   render: (args) => <ComparisonsStoryScene {...args} />,
+};
+
+// Story 3: 练习闯关与实战测试
+export const 练习闯关: StoryObj = {
+  name: '3. 练习闯关与实战测试',
+  render: () => <FormulaPracticeQuiz data={comparisonsQuizData} />,
 };

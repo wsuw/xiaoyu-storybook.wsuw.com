@@ -1,6 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { SinCosDefinition } from './SinCosDefinition';
 import { SinCosStoryScene } from './SinCosStoryScene';
+import { FormulaPracticeQuiz } from '../common/FormulaPracticeQuiz';
+import { sincosQuizData } from './sincosQuizData';
 
 const meta = {
   title: '公式/空间几何/sin 与 cos 三角圆周',
@@ -36,4 +38,10 @@ export const 故事演练: StoryObj = {
     angle: 45,
   },
   render: (args) => <SinCosStoryScene {...args} />,
+};
+
+// Story 3: 练习闯关与实战测试
+export const 练习闯关: StoryObj = {
+  name: '3. 练习闯关与实战测试',
+  render: () => <FormulaPracticeQuiz data={sincosQuizData} />,
 };

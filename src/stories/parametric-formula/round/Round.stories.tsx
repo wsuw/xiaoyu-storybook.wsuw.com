@@ -1,6 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { RoundDefinition } from './RoundDefinition';
 import { RoundStoryScene } from './RoundStoryScene';
+import { FormulaPracticeQuiz } from '../common/FormulaPracticeQuiz';
+import { roundQuizData } from './roundQuizData';
 
 const meta = {
   title: '公式/数值运算/round 四舍五入',
@@ -36,4 +38,10 @@ export const 故事演练: StoryObj = {
     rawVal: 485.625,
   },
   render: (args) => <RoundStoryScene {...args} />,
+};
+
+// Story 3: 练习闯关与实战测试
+export const 练习闯关: StoryObj = {
+  name: '3. 练习闯关与实战测试',
+  render: () => <FormulaPracticeQuiz data={roundQuizData} />,
 };

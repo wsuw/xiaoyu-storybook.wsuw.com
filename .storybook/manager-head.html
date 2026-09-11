@@ -1,4 +1,18 @@
+<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+<link rel="alternate icon" type="image/png" href="/favicon.png" />
 <style>
+  /* 让左侧品牌 Logo 高度与宽度完全释放，消除 Storybook 默认的 max-width: 150px 限制 */
+  .sidebar-header img,
+  [data-testid="sidebar-header"] img,
+  header img,
+  .sidebar-header a img,
+  header a img {
+    height: 38px !important;
+    max-height: 48px !important;
+    width: auto !important;
+    max-width: 100% !important;
+  }
+
   /* 隐藏左侧栏顶部设置齿轮按钮 (Settings menu button) */
   button[aria-label="Settings"],
   button[aria-label="About Storybook"],

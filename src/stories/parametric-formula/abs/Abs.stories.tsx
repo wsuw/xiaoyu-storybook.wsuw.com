@@ -1,6 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { AbsDefinition } from './AbsDefinition';
 import { AbsStoryScene } from './AbsStoryScene';
+import { FormulaPracticeQuiz } from '../common/FormulaPracticeQuiz';
+import { absQuizData } from './absQuizData';
 
 const meta = {
   title: '公式/数学与统计/abs 绝对值',
@@ -36,4 +38,10 @@ export const 故事演练: StoryObj = {
     deskOffset: -350,
   },
   render: (args) => <AbsStoryScene {...args} />,
+};
+
+// Story 3: 练习闯关与实战测试
+export const 练习闯关: StoryObj = {
+  name: '3. 练习闯关与实战测试',
+  render: () => <FormulaPracticeQuiz data={absQuizData} />,
 };

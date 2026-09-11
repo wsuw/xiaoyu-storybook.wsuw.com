@@ -1,6 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { SqrtDefinition } from './SqrtDefinition';
 import { SqrtStoryScene } from './SqrtStoryScene';
+import { FormulaPracticeQuiz } from '../common/FormulaPracticeQuiz';
+import { sqrtQuizData } from './sqrtQuizData';
 
 const meta = {
   title: '公式/空间几何/sqrt 勾股开方',
@@ -47,4 +49,10 @@ export const 故事演练: StoryObj = {
     h: 600,
   },
   render: (args) => <SqrtStoryScene {...args} />,
+};
+
+// Story 3: 练习闯关与实战测试
+export const 练习闯关: StoryObj = {
+  name: '3. 练习闯关与实战测试',
+  render: () => <FormulaPracticeQuiz data={sqrtQuizData} />,
 };

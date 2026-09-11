@@ -1,6 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { OrDefinition } from './OrDefinition';
 import { OrStoryScene } from './OrStoryScene';
+import { FormulaPracticeQuiz } from '../common/FormulaPracticeQuiz';
+import { orQuizData } from './orQuizData';
 
 const meta = {
   title: '公式/逻辑与条件/or 逻辑或',
@@ -47,4 +49,10 @@ export const 故事演练: StoryObj = {
     w: 500,
   },
   render: (args) => <OrStoryScene {...args} />,
+};
+
+// Story 3: 练习闯关与实战测试
+export const 练习闯关: StoryObj = {
+  name: '3. 练习闯关与实战测试',
+  render: () => <FormulaPracticeQuiz data={orQuizData} />,
 };

@@ -1,6 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { IfDefinition } from './IfDefinition';
 import { IfStoryScene } from './IfStoryScene';
+import { FormulaPracticeQuiz } from '../common/FormulaPracticeQuiz';
+import { ifQuizData } from './ifQuizData';
 
 const meta = {
   title: '公式/逻辑与条件/if 条件判断',
@@ -36,4 +38,10 @@ export const 故事演练: StoryObj = {
     w: 550,
   },
   render: (args) => <IfStoryScene {...args} />,
+};
+
+// Story 3: 练习闯关与实战测试
+export const 练习闯关: StoryObj = {
+  name: '3. 练习闯关与实战测试',
+  render: () => <FormulaPracticeQuiz data={ifQuizData} />,
 };

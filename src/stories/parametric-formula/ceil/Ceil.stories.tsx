@@ -1,6 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { CeilDefinition } from './CeilDefinition';
 import { CeilStoryScene } from './CeilStoryScene';
+import { FormulaPracticeQuiz } from '../common/FormulaPracticeQuiz';
+import { ceilQuizData } from './ceilQuizData';
 
 const meta = {
   title: '公式/数值运算/ceil 向上取整',
@@ -36,4 +38,10 @@ export const 故事演练: StoryObj = {
     h: 2200,
   },
   render: (args) => <CeilStoryScene {...args} />,
+};
+
+// Story 3: 练习闯关与实战测试
+export const 练习闯关: StoryObj = {
+  name: '3. 练习闯关与实战测试',
+  render: () => <FormulaPracticeQuiz data={ceilQuizData} />,
 };

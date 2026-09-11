@@ -1,6 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { AllInDefinition } from './AllInDefinition';
 import { AllInStoryScene } from './AllInStoryScene';
+import { FormulaPracticeQuiz } from '../common/FormulaPracticeQuiz';
+import { allinQuizData } from './allinQuizData';
 
 const meta = {
   title: '公式/逻辑与条件/AllIn 集合包含',
@@ -65,4 +67,10 @@ export const 故事演练: StoryObj = {
     hasBottomSensorLight: true,
   },
   render: (args) => <AllInStoryScene {...args} />,
+};
+
+// Story 3: 练习闯关与实战测试
+export const 练习闯关: StoryObj = {
+  name: '3. 练习闯关与实战测试',
+  render: () => <FormulaPracticeQuiz data={allinQuizData} />,
 };

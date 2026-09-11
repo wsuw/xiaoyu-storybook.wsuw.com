@@ -1,6 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { SignDefinition } from './SignDefinition';
 import { SignStoryScene } from './SignStoryScene';
+import { FormulaPracticeQuiz } from '../common/FormulaPracticeQuiz';
+import { signQuizData } from './signQuizData';
 
 const meta = {
   title: '公式/数值运算/sign 符号判定',
@@ -36,4 +38,10 @@ export const 故事演练: StoryObj = {
     moveOffset: -60,
   },
   render: (args) => <SignStoryScene {...args} />,
+};
+
+// Story 3: 练习闯关与实战测试
+export const 练习闯关: StoryObj = {
+  name: '3. 练习闯关与实战测试',
+  render: () => <FormulaPracticeQuiz data={signQuizData} />,
 };

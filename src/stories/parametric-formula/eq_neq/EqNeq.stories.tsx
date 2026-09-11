@@ -1,6 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { EqNeqDefinition } from './EqNeqDefinition';
 import { EqNeqStoryScene } from './EqNeqStoryScene';
+import { FormulaPracticeQuiz } from '../common/FormulaPracticeQuiz';
+import { eqNeqQuizData } from './eqNeqQuizData';
 
 const meta = {
   title: '公式/逻辑与条件/== 与 != 比较',
@@ -34,4 +36,10 @@ export const 故事演练: StoryObj = {
     hasDoor: 1,
   },
   render: (args) => <EqNeqStoryScene {...args} />,
+};
+
+// Story 3: 练习闯关与实战测试
+export const 练习闯关: StoryObj = {
+  name: '3. 练习闯关与实战测试',
+  render: () => <FormulaPracticeQuiz data={eqNeqQuizData} />,
 };

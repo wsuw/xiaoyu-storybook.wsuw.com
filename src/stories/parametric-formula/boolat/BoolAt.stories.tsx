@@ -1,6 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { BoolAtDefinition } from './BoolAtDefinition';
 import { BoolAtStoryScene } from './BoolAtStoryScene';
+import { FormulaPracticeQuiz } from '../common/FormulaPracticeQuiz';
+import { boolatQuizData } from './boolatQuizData';
 
 const meta = {
   title: '公式/逻辑与条件/BoolAt 严格一致',
@@ -49,4 +51,10 @@ export const 故事演练: StoryObj = {
     hasGlass: true,
   },
   render: (args) => <BoolAtStoryScene {...args} />,
+};
+
+// Story 3: 练习闯关与实战测试
+export const 练习闯关: StoryObj = {
+  name: '3. 练习闯关与实战测试',
+  render: () => <FormulaPracticeQuiz data={boolatQuizData} />,
 };

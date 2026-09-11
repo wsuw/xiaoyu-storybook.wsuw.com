@@ -1,6 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { FloorDefinition } from './FloorDefinition';
 import { FloorStoryScene } from './FloorStoryScene';
+import { FormulaPracticeQuiz } from '../common/FormulaPracticeQuiz';
+import { floorQuizData } from './floorQuizData';
 
 const meta = {
   title: '公式/数值运算/floor 向下取整',
@@ -36,4 +38,10 @@ export const 故事演练: StoryObj = {
     netH: 720,
   },
   render: (args) => <FloorStoryScene {...args} />,
+};
+
+// Story 3: 练习闯关与实战测试
+export const 练习闯关: StoryObj = {
+  name: '3. 练习闯关与实战测试',
+  render: () => <FormulaPracticeQuiz data={floorQuizData} />,
 };

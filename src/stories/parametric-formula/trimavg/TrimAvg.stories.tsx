@@ -1,6 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { TrimAvgDefinition } from './TrimAvgDefinition';
 import { TrimAvgStoryScene } from './TrimAvgStoryScene';
+import { FormulaPracticeQuiz } from '../common/FormulaPracticeQuiz';
+import { trimavgQuizData } from './trimavgQuizData';
 
 const meta = {
   title: '公式/数值运算/trimavg 剔除非公式项平均',
@@ -36,4 +38,10 @@ export const 故事演练: StoryObj = {
     lockedW: 550,
   },
   render: (args) => <TrimAvgStoryScene {...args} />,
+};
+
+// Story 3: 练习闯关与实战测试
+export const 练习闯关: StoryObj = {
+  name: '3. 练习闯关与实战测试',
+  render: () => <FormulaPracticeQuiz data={trimavgQuizData} />,
 };

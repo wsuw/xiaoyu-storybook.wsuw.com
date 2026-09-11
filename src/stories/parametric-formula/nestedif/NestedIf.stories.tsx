@@ -1,6 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { NestedIfDefinition } from './NestedIfDefinition';
 import { NestedIfStoryScene } from './NestedIfStoryScene';
+import { FormulaPracticeQuiz } from '../common/FormulaPracticeQuiz';
+import { nestedifQuizData } from './nestedifQuizData';
 
 const meta = {
   title: '公式/逻辑与条件/nestedif 阶梯判断',
@@ -36,4 +38,10 @@ export const 故事演练: StoryObj = {
     w: 1200,
   },
   render: (args) => <NestedIfStoryScene {...args} />,
+};
+
+// Story 3: 练习闯关与实战测试
+export const 练习闯关: StoryObj = {
+  name: '3. 练习闯关与实战测试',
+  render: () => <FormulaPracticeQuiz data={nestedifQuizData} />,
 };

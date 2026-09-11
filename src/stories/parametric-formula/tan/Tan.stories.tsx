@@ -1,6 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { TanDefinition } from './TanDefinition';
 import { TanStoryScene } from './TanStoryScene';
+import { FormulaPracticeQuiz } from '../common/FormulaPracticeQuiz';
+import { tanQuizData } from './tanQuizData';
 
 const meta = {
   title: '公式/空间几何/tan 正切斜率',
@@ -36,4 +38,10 @@ export const 故事演练: StoryObj = {
     stairAngle: 32,
   },
   render: (args) => <TanStoryScene {...args} />,
+};
+
+// Story 3: 练习闯关与实战测试
+export const 练习闯关: StoryObj = {
+  name: '3. 练习闯关与实战测试',
+  render: () => <FormulaPracticeQuiz data={tanQuizData} />,
 };

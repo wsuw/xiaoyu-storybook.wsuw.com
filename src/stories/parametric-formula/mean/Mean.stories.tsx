@@ -1,6 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { MeanDefinition } from './MeanDefinition';
 import { MeanStoryScene } from './MeanStoryScene';
+import { FormulaPracticeQuiz } from '../common/FormulaPracticeQuiz';
+import { meanQuizData } from './meanQuizData';
 
 const meta = {
   title: '公式/数值运算/mean 算术平均',
@@ -36,4 +38,10 @@ export const 故事演练: StoryObj = {
     yDiff: 80,
   },
   render: (args) => <MeanStoryScene {...args} />,
+};
+
+// Story 3: 练习闯关与实战测试
+export const 练习闯关: StoryObj = {
+  name: '3. 练习闯关与实战测试',
+  render: () => <FormulaPracticeQuiz data={meanQuizData} />,
 };

@@ -1,6 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { AndDefinition } from './AndDefinition';
 import { AndStoryScene } from './AndStoryScene';
+import { FormulaPracticeQuiz } from '../common/FormulaPracticeQuiz';
+import { andQuizData } from './andQuizData';
 
 const meta = {
   title: '公式/逻辑与条件/and 逻辑与',
@@ -47,4 +49,10 @@ export const 故事演练: StoryObj = {
     w: 550,
   },
   render: (args) => <AndStoryScene {...args} />,
+};
+
+// Story 3: 练习闯关与实战测试
+export const 练习闯关: StoryObj = {
+  name: '3. 练习闯关与实战测试',
+  render: () => <FormulaPracticeQuiz data={andQuizData} />,
 };

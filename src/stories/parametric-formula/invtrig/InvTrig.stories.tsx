@@ -1,6 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { InvTrigDefinition } from './InvTrigDefinition';
 import { InvTrigStoryScene } from './InvTrigStoryScene';
+import { FormulaPracticeQuiz } from '../common/FormulaPracticeQuiz';
+import { invtrigQuizData } from './invtrigQuizData';
 
 const meta = {
   title: '公式/空间几何/反三角函数 (asin, acos, atan)',
@@ -36,4 +38,10 @@ export const 故事演练: StoryObj = {
     liftH: 240,
   },
   render: (args) => <InvTrigStoryScene {...args} />,
+};
+
+// Story 3: 练习闯关与实战测试
+export const 练习闯关: StoryObj = {
+  name: '3. 练习闯关与实战测试',
+  render: () => <FormulaPracticeQuiz data={invtrigQuizData} />,
 };
