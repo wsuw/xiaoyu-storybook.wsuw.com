@@ -5,7 +5,7 @@ import { FormulaPracticeQuiz } from '../common/FormulaPracticeQuiz';
 import { eqNeqQuizData } from './eqNeqQuizData';
 
 const meta = {
-  title: '公式/逻辑与条件/== 与 != 比较',
+  title: '参数化家装手记/逻辑与条件/== 与 != 比较',
   parameters: {
     layout: 'fullscreen',
   },

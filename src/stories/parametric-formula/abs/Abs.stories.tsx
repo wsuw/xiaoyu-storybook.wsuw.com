@@ -5,7 +5,7 @@ import { FormulaPracticeQuiz } from '../common/FormulaPracticeQuiz';
 import { absQuizData } from './absQuizData';
 
 const meta = {
-  title: '公式/数学与统计/abs 绝对值',
+  title: '参数化家装手记/数学与统计/abs 绝对值',
   parameters: {
     layout: 'fullscreen',
   },

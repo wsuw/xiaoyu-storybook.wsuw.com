@@ -5,7 +5,7 @@ import { FormulaPracticeQuiz } from '../common/FormulaPracticeQuiz';
 import { nestedifQuizData } from './nestedifQuizData';
 
 const meta = {
-  title: '公式/逻辑与条件/nestedif 阶梯判断',
+  title: '参数化家装手记/逻辑与条件/nestedif 阶梯判断',
   parameters: {
     layout: 'fullscreen',
   },

@@ -5,7 +5,7 @@ import { FormulaPracticeQuiz } from '../common/FormulaPracticeQuiz';
 import { invtrigQuizData } from './invtrigQuizData';
 
 const meta = {
-  title: '公式/空间几何/反三角函数 (asin, acos, atan)',
+  title: '参数化家装手记/空间几何/反三角函数 (asin, acos, atan)',
   parameters: {
     layout: 'fullscreen',
   },

@@ -5,7 +5,7 @@ import { FormulaPracticeQuiz } from '../common/FormulaPracticeQuiz';
 import { signQuizData } from './signQuizData';
 
 const meta = {
-  title: '公式/数值运算/sign 符号判定',
+  title: '参数化家装手记/数值运算/sign 符号判定',
   parameters: {
     layout: 'fullscreen',
   },

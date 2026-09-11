@@ -5,7 +5,7 @@ import { FormulaPracticeQuiz } from '../common/FormulaPracticeQuiz';
 import { tanQuizData } from './tanQuizData';
 
 const meta = {
-  title: '公式/空间几何/tan 正切斜率',
+  title: '参数化家装手记/空间几何/tan 正切斜率',
   parameters: {
     layout: 'fullscreen',
   },

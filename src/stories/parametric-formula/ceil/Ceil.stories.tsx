@@ -5,7 +5,7 @@ import { FormulaPracticeQuiz } from '../common/FormulaPracticeQuiz';
 import { ceilQuizData } from './ceilQuizData';
 
 const meta = {
-  title: '公式/数值运算/ceil 向上取整',
+  title: '参数化家装手记/数值运算/ceil 向上取整',
   parameters: {
     layout: 'fullscreen',
   },

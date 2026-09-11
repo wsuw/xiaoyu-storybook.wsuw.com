@@ -5,7 +5,7 @@ import { FormulaPracticeQuiz } from '../common/FormulaPracticeQuiz';
 import { trimavgQuizData } from './trimavgQuizData';
 
 const meta = {
-  title: '公式/数值运算/trimavg 剔除非公式项平均',
+  title: '参数化家装手记/数值运算/trimavg 剔除非公式项平均',
   parameters: {
     layout: 'fullscreen',
   },

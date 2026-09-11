@@ -5,7 +5,7 @@ import { FormulaPracticeQuiz } from '../common/FormulaPracticeQuiz';
 import { roundQuizData } from './roundQuizData';
 
 const meta = {
-  title: '公式/数值运算/round 四舍五入',
+  title: '参数化家装手记/数值运算/round 四舍五入',
   parameters: {
     layout: 'fullscreen',
   },

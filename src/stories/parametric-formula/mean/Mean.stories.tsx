@@ -5,7 +5,7 @@ import { FormulaPracticeQuiz } from '../common/FormulaPracticeQuiz';
 import { meanQuizData } from './meanQuizData';
 
 const meta = {
-  title: '公式/数值运算/mean 算术平均',
+  title: '参数化家装手记/数值运算/mean 算术平均',
   parameters: {
     layout: 'fullscreen',
   },

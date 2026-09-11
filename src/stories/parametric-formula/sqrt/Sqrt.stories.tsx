@@ -5,7 +5,7 @@ import { FormulaPracticeQuiz } from '../common/FormulaPracticeQuiz';
 import { sqrtQuizData } from './sqrtQuizData';
 
 const meta = {
-  title: '公式/空间几何/sqrt 勾股开方',
+  title: '参数化家装手记/空间几何/sqrt 勾股开方',
   parameters: {
     layout: 'fullscreen',
   },

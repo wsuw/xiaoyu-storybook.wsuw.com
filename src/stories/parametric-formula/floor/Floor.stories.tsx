@@ -5,7 +5,7 @@ import { FormulaPracticeQuiz } from '../common/FormulaPracticeQuiz';
 import { floorQuizData } from './floorQuizData';
 
 const meta = {
-  title: '公式/数值运算/floor 向下取整',
+  title: '参数化家装手记/数值运算/floor 向下取整',
   parameters: {
     layout: 'fullscreen',
   },

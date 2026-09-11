@@ -5,7 +5,7 @@ import { FormulaPracticeQuiz } from '../common/FormulaPracticeQuiz';
 import { andQuizData } from './andQuizData';
 
 const meta = {
-  title: '公式/逻辑与条件/and 逻辑与',
+  title: '参数化家装手记/逻辑与条件/and 逻辑与',
   parameters: {
     layout: 'fullscreen',
   },

@@ -5,7 +5,7 @@ import { FormulaPracticeQuiz } from '../common/FormulaPracticeQuiz';
 import { sincosQuizData } from './sincosQuizData';
 
 const meta = {
-  title: '公式/空间几何/sin 与 cos 三角圆周',
+  title: '参数化家装手记/空间几何/sin 与 cos 三角圆周',
   parameters: {
     layout: 'fullscreen',
   },
