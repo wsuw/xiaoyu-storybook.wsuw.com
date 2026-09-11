@@ -53,7 +53,7 @@ export const IfDefinition: React.FC<IfDefinitionProps> = () => {
             boxShadow: '0 4px 12px -2px #6366f115',
           }}
         >
-          {"if(#W < 500, 350, 450)"}
+          {"if(#W > 600, 2, 1)"}
         </div>
       </div>
 
@@ -84,21 +84,21 @@ export const IfDefinition: React.FC<IfDefinitionProps> = () => {
               marginBottom: '16px',
             }}
           >
-            {"if(#W < 500, 350, 450)"}
+            {"if(#W > 600, 2, 1)"}
           </div>
 
           <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', fontSize: '14px', lineHeight: '1.8', color: '#334155' }}>
             <p style={{ margin: 0 }}>
-              <strong>通俗一句话：</strong> <strong>“如果宽度小于500，就用350的浅抽屉；否则用450的标准深抽屉。”</strong>
+              <strong>通俗一句话：</strong> <strong>“如果柜宽大于600mm，就自动装2扇对开门；否则装1扇单开门。”</strong>
             </p>
             <p style={{ margin: 0, color: '#475569' }}>
               <strong>参数含义解析：</strong>
               <br />
-              • <code>#W &lt; 500</code>：判断条件。柜体总宽度是否小于 500mm（窄道环境）。
+              • <code>#W &gt; 600</code>：判断条件。单扇掩门受合页承重及力臂影响，设计规范上限通常为 600mm。
               <br />
-              • <code>350</code>：条件成立（为真）时的取值。抽屉深度设为 350mm，拉出后留足人行动线，防止碰墙。
+              • <code>2</code>：条件成立（为真）时的取值。柜宽超标，自动切换为 2 扇对开门，保证五金受力安全。
               <br />
-              • <code>450</code>：条件不成立（为假）时的取值。空间宽裕，切换为 450mm 大容量深抽屉。
+              • <code>1</code>：条件不成立（为假）时的取值。宽度适中，保持 1 扇大单开门，简洁美观、取物无阻隔。
             </p>
           </div>
         </div>
@@ -119,23 +119,23 @@ export const IfDefinition: React.FC<IfDefinitionProps> = () => {
           </h4>
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}>
             <div style={{ background: '#f8fafc', padding: '16px', borderRadius: '8px', border: '1px solid #e2e8f0' }}>
-              <div style={{ fontWeight: 700, color: '#0f172a', marginBottom: '8px' }}>例子 1：紧凑玄关，柜宽 420mm</div>
+              <div style={{ fontWeight: 700, color: '#0f172a', marginBottom: '8px' }}>例子 1：窄柜边几，柜宽 450mm</div>
               <div style={{ fontSize: '13px', color: '#475569', lineHeight: '1.8' }}>
-                • 输入：<code>#W = 420mm</code>
+                • 输入：<code>#W = 450mm</code>
                 <br />
-                • 判断：<code>420 &lt; 500</code> 成立（True）
+                • 判断：<code>450 &gt; 600</code> 不成立（False）
                 <br />
-                • 结果：抽屉深度自动切换为 <strong>350mm</strong>（浅抽屉），避免开门撞玄关门套。
+                • 结果：生成 <strong>1 扇单开门</strong>，单扇宽度约 447mm，开启灵活轻巧。
               </div>
             </div>
             <div style={{ background: '#f8fafc', padding: '16px', borderRadius: '8px', border: '1px solid #e2e8f0' }}>
-              <div style={{ fontWeight: 700, color: '#0f172a', marginBottom: '8px' }}>例子 2：宽敞主卧，柜宽 650mm</div>
+              <div style={{ fontWeight: 700, color: '#0f172a', marginBottom: '8px' }}>例子 2：标准主卧衣柜，柜宽 800mm</div>
               <div style={{ fontSize: '13px', color: '#475569', lineHeight: '1.8' }}>
-                • 输入：<code>#W = 650mm</code>
+                • 输入：<code>#W = 800mm</code>
                 <br />
-                • 判断：<code>650 &lt; 500</code> 不成立（False）
+                • 判断：<code>800 &gt; 600</code> 成立（True）
                 <br />
-                • 结果：抽屉深度自动升级为 <strong>450mm</strong>（深抽屉），充分利用衣柜进深多储物。
+                • 结果：自动拆分为 <strong>2 扇对开门</strong>，每扇门宽约 397mm，彻底杜绝单门超重下垂变形！
               </div>
             </div>
           </div>
@@ -157,9 +157,9 @@ export const IfDefinition: React.FC<IfDefinitionProps> = () => {
               🎯 这个公式可以用来做什么？
             </h4>
             <ul style={{ margin: 0, paddingLeft: '20px', fontSize: '14px', lineHeight: '1.9', color: '#334155' }}>
-              <li><strong>尺寸阈值自适应换型</strong>：柜宽过窄时自动降级五金导轨与抽屉进深；</li>
-              <li><strong>消除重复建模</strong>：无需为“浅柜版”和“深柜版”分别画两套模型，一套公式全部搞定；</li>
-              <li><strong>安装防碰撞保障</strong>：在方案设计阶段就自动杜绝碰撞缺陷。</li>
+              <li><strong>工艺阈值安全拦截</strong>：用公式守住五金结构底线，超过 600mm 自动由单门改对开门；</li>
+              <li><strong>门扇尺寸动态联动</strong>：单扇门宽公式配合 <code>if(#W &gt; 600, (#W-6)/2, #W-3)</code>，尺寸连环自适应；</li>
+              <li><strong>消除繁琐建模选型</strong>：设计师只管拉伸柜体总宽，门板数量及结构自发响应演进。</li>
             </ul>
           </div>
 
@@ -177,7 +177,7 @@ export const IfDefinition: React.FC<IfDefinitionProps> = () => {
               💡 建模核心作用与工程价值
             </h4>
             <p style={{ margin: '0 0 12px 0', fontSize: '14px', lineHeight: '1.8', color: '#334155' }}>
-              条件二分支是参数化设计中最核心的基础设施，让模型具备“懂空间、知进退”的智能生命力。
+              条件分支是参数化设计中最核心的基础设施，让模型具备“懂工艺、知进退”的自适应工程生命力。
             </p>
             <div
               style={{
@@ -189,7 +189,7 @@ export const IfDefinition: React.FC<IfDefinitionProps> = () => {
                 fontWeight: 500,
               }}
             >
-              ✦ 场景示范：窄道玄关柜与抽屉避让（可在左侧切换进入【2. 3D 故事与交互演练】拖动柜宽在 500 前后感受抽屉深度切换）
+              ✦ 场景示范：柜宽驱动单/双门自适应（可在左侧切换进入【2. 3D 故事与交互演练】拖动柜宽在 600 前后感受门扇形态切换）
             </div>
           </div>
         </div>

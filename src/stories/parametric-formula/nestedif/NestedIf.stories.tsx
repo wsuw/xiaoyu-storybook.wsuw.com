@@ -21,19 +21,19 @@ export const 公式定义: StoryObj = {
 export const 故事演练: StoryObj = {
   name: '2. 3D 故事与交互演练',
   argTypes: {
-    d: {
-      name: '柜体深度 (#D)',
+    w: {
+      name: '柜体宽度 (#W)',
       control: {
         type: 'range',
-        min: 280,
-        max: 550,
-        step: 10,
+        min: 600,
+        max: 2600,
+        step: 50,
       },
-      description: '柜体深度 (#D)，在 Storybook Controls 中实时修改此值即可驱动 3D 变化',
+      description: '柜体总宽 (#W)：跨度 ≤800 为1腔，≤1500 为2腔，≤2200 为3腔，>2200 为4腔整墙大柜',
     },
   },
   args: {
-    d: 340,
+    w: 1200,
   },
   render: (args) => <NestedIfStoryScene {...args} />,
 };

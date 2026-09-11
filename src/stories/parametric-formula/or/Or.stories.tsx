@@ -22,18 +22,29 @@ export const 故事演练: StoryObj = {
   name: '2. 3D 故事与交互演练',
   argTypes: {
     h: {
-      name: '柜体高度 (#H)',
+      name: '门板高度 (#H)',
       control: {
         type: 'range',
-        min: 1800,
-        max: 2800,
+        min: 1400,
+        max: 2700,
         step: 50,
       },
-      description: '柜体高度 (#H)，在 Storybook Controls 中实时修改此值即可驱动 3D 变化',
+      description: '门板高度 (#H)，超标红线 2000mm（一门到顶）',
+    },
+    w: {
+      name: '门板宽度 (#W)',
+      control: {
+        type: 'range',
+        min: 350,
+        max: 850,
+        step: 25,
+      },
+      description: '门板宽度 (#W)，超标红线 600mm（单扇大门力矩过大）',
     },
   },
   args: {
-    h: 2500,
+    h: 2400,
+    w: 500,
   },
   render: (args) => <OrStoryScene {...args} />,
 };

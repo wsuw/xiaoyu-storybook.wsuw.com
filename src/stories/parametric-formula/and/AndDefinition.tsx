@@ -53,7 +53,7 @@ export const AndDefinition: React.FC<AndDefinitionProps> = () => {
             boxShadow: '0 4px 12px -2px #f59e0b15',
           }}
         >
-          {"#W > 600 and #D > 380"}
+          #H &gt;= 2400 and #W &gt;= 500
         </div>
       </div>
 
@@ -84,21 +84,21 @@ export const AndDefinition: React.FC<AndDefinitionProps> = () => {
               marginBottom: '16px',
             }}
           >
-            {"#W > 600 and #D > 380"}
+            #H &gt;= 2400 and #W &gt;= 500
           </div>
 
           <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', fontSize: '14px', lineHeight: '1.8', color: '#334155' }}>
             <p style={{ margin: 0 }}>
-              <strong>通俗一句话：</strong> <strong>“且条件（两个必须同时满足）：只有当宽度既大于600，且深度又大于380时，才判定存在严重下垂风险，自动插入防塌中立柱。”</strong>
+              <strong>通俗一句话：</strong> <strong>“且条件（两个条件必须同时满足）：只有当衣柜门板高度既大于等于2400mm，且宽度又大于等于500mm时，才判定存在弓形翘曲严重风险，自动在门背开槽预埋通顶拉直器，并将阻尼铰链由3个升级至5个。”</strong>
             </p>
             <p style={{ margin: 0, color: '#475569' }}>
               <strong>参数含义解析：</strong>
               <br />
-              • <code>#W &gt; 600</code>：大跨度条件。跨度大容易导致层板中央下弯。
+              • <code>#H &gt;= 2400</code>：超高门板条件。高定极简“一门到顶”高度通常在 2.4m~2.7m，垂直纵深大。
               <br />
-              • <code>and</code>：逻辑与连接词。前后两项必须同时为真才判定为真。
+              • <code>and</code>：逻辑与操作符。左右两边条件<strong>必须同时成立</strong>，整体结果才为真（True）；只要有一边不满足，结果即为假（False）。
               <br />
-              • <code>#D &gt; 380</code>：深进深条件。如果只是宽但很浅（如鞋架放几双鞋），自重和承重其实不大；但如果又深又宽，堆满大厚书时下弯力矩剧增。
+              • <code>#W &gt;= 500</code>：超宽门板条件。门板越宽，受力表面积与横向应力力矩成倍放大。
             </p>
           </div>
         </div>
@@ -117,25 +117,37 @@ export const AndDefinition: React.FC<AndDefinitionProps> = () => {
           <h4 style={{ margin: '0 0 14px 0', fontSize: '16px', color: '#0f172a', display: 'flex', alignItems: 'center', gap: '8px' }}>
             🔢 直观计算举例（带入真实数字）
           </h4>
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '16px' }}>
             <div style={{ background: '#f8fafc', padding: '16px', borderRadius: '8px', border: '1px solid #e2e8f0' }}>
-              <div style={{ fontWeight: 700, color: '#0f172a', marginBottom: '8px' }}>情况 A：宽 700mm，但深度仅 300mm（浅书架）</div>
+              <div style={{ fontWeight: 700, color: '#0f172a', marginBottom: '8px' }}>情况 A：高 2600，宽 400（极窄高门）</div>
               <div style={{ fontSize: '13px', color: '#475569', lineHeight: '1.8' }}>
-                • 校验：<code>700 &gt; 600 (真)</code> 但 <code>300 &gt; 380 (假)</code>
+                • 校验：<code>2600 &gt;= 2400 (真)</code> 但 <code>400 &gt;= 500 (假)</code>
                 <br />
                 • and 计算：<strong>假（False）</strong>
                 <br />
-                • 结果：<strong>不加立柱</strong>，保持柜体内部空间大通透，不增加不必要构件。
+                • 结果：<strong>不加拉直器，保持 3 铰链</strong>。虽然高，但很窄，木材纤维受力截面小不易翘，免开槽省工时。
               </div>
             </div>
+
             <div style={{ background: '#f8fafc', padding: '16px', borderRadius: '8px', border: '1px solid #e2e8f0' }}>
-              <div style={{ fontWeight: 700, color: '#0f172a', marginBottom: '8px' }}>情况 B：宽 750mm，深度 420mm（深重大书架）</div>
+              <div style={{ fontWeight: 700, color: '#0f172a', marginBottom: '8px' }}>情况 B：高 1800，宽 600（地柜矮阔门）</div>
               <div style={{ fontSize: '13px', color: '#475569', lineHeight: '1.8' }}>
-                • 校验：<code>750 &gt; 600 (真)</code> 且 <code>420 &gt; 380 (真)</code>
+                • 校验：<code>1800 &gt;= 2400 (假)</code> 但 <code>600 &gt;= 500 (真)</code>
                 <br />
-                • and 计算：<strong>真（True）</strong>
+                • and 计算：<strong>假（False）</strong>
                 <br />
-                • 结果：<strong>触发预警并自动加装中央加固立柱</strong>，彻底消除日后层板被压塌风险！
+                • 结果：<strong>不加拉直器，保持 3 铰链</strong>。虽然宽，但门身短自重轻，完全在刚度安全范围内。
+              </div>
+            </div>
+
+            <div style={{ background: '#f8fafc', padding: '16px', borderRadius: '8px', border: '1px solid #e2e8f0' }}>
+              <div style={{ fontWeight: 700, color: '#0f172a', marginBottom: '8px' }}>情况 C：高 2500，宽 550（超高大阔门）</div>
+              <div style={{ fontSize: '13px', color: '#475569', lineHeight: '1.8' }}>
+                • 校验：<code>2500 &gt;= 2400 (真)</code> 且 <code>550 &gt;= 500 (真)</code>
+                <br />
+                • and 计算：<strong>真（True）双限齐破！</strong>
+                <br />
+                • 结果：<strong>必须开槽加装通顶香槟金金属拉直器 + 铰链增至 5 铰</strong>，坚决杜绝出厂后弓形变形！
               </div>
             </div>
           </div>
@@ -154,12 +166,12 @@ export const AndDefinition: React.FC<AndDefinitionProps> = () => {
             }}
           >
             <h4 style={{ margin: '0 0 12px 0', fontSize: '16px', color: '#0f172a' }}>
-              🎯 这个公式可以用来做什么？
+              🎯 这个公式在全屋定制中用来做什么？
             </h4>
             <ul style={{ margin: 0, paddingLeft: '20px', fontSize: '14px', lineHeight: '1.9', color: '#334155' }}>
-              <li><strong>多维组合危险校验</strong>：如“超宽且超高”强制加天地螺杆防倾倒；</li>
-              <li><strong>精密安装干涉规避</strong>：“门宽&gt;500且内藏滑轨”时强制要求加防尘条；</li>
-              <li><strong>精确保护工艺</strong>：不误伤普通轻量场景，只在真正高风险时介入。</li>
+              <li><strong>一门到顶高柜五金风控</strong>：精准识别危险大板，避免售后门缝关不拢退货；</li>
+              <li><strong>铰链数量阶梯智能联动</strong>：由单薄的 3 铰链自动补强至 5 铰链均匀分担下垂拉力；</li>
+              <li><strong>避免成本浪费</strong>：对未达风险红线的小门板绝不冗余开槽加装昂贵拉直器。</li>
             </ul>
           </div>
 
@@ -177,19 +189,19 @@ export const AndDefinition: React.FC<AndDefinitionProps> = () => {
               💡 建模核心作用与工程价值
             </h4>
             <p style={{ margin: '0 0 12px 0', fontSize: '14px', lineHeight: '1.8', color: '#334155' }}>
-              实现严谨的交集逻辑。只有在多项结构风险同时存在时才介入加固构件，既保障美观通透，又守住安全底线。
+              <code>and</code> 是严密的交集安全锁。它杜绝了任何“单点误判”，将力学工程风险与制造成本之间的博弈转化为精准的代码逻辑，守住高端品质底线。
             </p>
             <div
               style={{
                 fontSize: '13px',
-                color: '#f59e0b',
-                background: '#f59e0b0d',
+                color: '#b45309',
+                background: '#fef3c7',
                 padding: '8px 12px',
                 borderRadius: '6px',
                 fontWeight: 500,
               }}
             >
-              ✦ 场景示范：大跨度超深书架与中央防弯立柱（可在左侧切换进入【2. 3D 故事与交互演练】同时调整 w 和 d 体验联动）
+              ◆ 场景示范：一门到顶衣柜门板双限防翘曲（可在 3D 演练中单独滑动长宽体验）
             </div>
           </div>
         </div>

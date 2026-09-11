@@ -22,14 +22,14 @@ export const 故事演练: StoryObj = {
   name: '2. 3D 故事与交互演练',
   argTypes: {
     angle: {
-      name: '托盘旋出角度',
+      name: '隐形门开启角度 (0°-90°)',
       control: {
         type: 'range',
         min: 0,
-        max: 100,
-        step: 1,
+        max: 90,
+        step: 2,
       },
-      description: '托盘旋出角度，在 Storybook Controls 中实时修改此值即可驱动 3D 变化',
+      description: '隐形门开启角度，在 Storybook Controls 中实时修改此值即可驱动 3D 变化',
     },
   },
   args: {

@@ -53,7 +53,7 @@ export const EqNeqDefinition: React.FC<EqNeqDefinitionProps> = () => {
             boxShadow: '0 4px 12px -2px #ec489915',
           }}
         >
-          #DoorType == 1
+          #HasDoor == 1
         </div>
       </div>
 
@@ -83,20 +83,20 @@ export const EqNeqDefinition: React.FC<EqNeqDefinitionProps> = () => {
               marginBottom: '16px',
             }}
           >
-            #DoorType == 1
+            #HasDoor == 1
           </div>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', fontSize: '14px', lineHeight: '1.8', color: '#334155' }}>
             <p style={{ margin: 0 }}>
-              <strong>通俗一句话：</strong> <strong>“恒等 / 不等匹配（== 和 !=）：精准检测客户选择的选项编号。例如客户选定 1 号铝框长虹玻璃门，系统识别 #DoorType == 1 为真，模型立刻切入玻璃透光材质并生成铝合金窄边框结构；否则生成 0 号木饰面板。”</strong>
+              <strong>通俗一句话：</strong> <strong>“柜门显隐开关：#HasDoor == 1 成立时，安上整扇防尘柜门与五金拉手；当等于 0（即 #HasDoor != 1）时，一键卸下柜门，切换为清爽通透的开放展示格！”</strong>
             </p>
             <p style={{ margin: 0, color: '#475569' }}>
               <strong>参数含义解析：</strong>
               <br />
-              • <code>#DoorType</code>：门板选型字典枚举 ID（0 代表普通纯实木平板门，1 代表极窄铝框玻璃门，2 代表百叶透气门）。
+              • <code>#HasDoor</code>：柜门显隐状态布尔值（1 代表带门封闭柜，0 代表无门开放格）。
               <br />
-              • <code>== 1</code>：恒等判断。只有输入值完全等于 1 时才为真（True），否则为假（False）。
+              • <code>== 1</code>：恒等等于判断。当且仅当等于 1 时为真（True），生成掩门及合页；否则不生成。
               <br />
-              • <code>!=</code>：不等于判断（如 <code>#DoorType != 0</code> 用于判断“只要不是木门”，就生成特定金属铰链配件）。
+              • <code>!= 1</code>：不等于判断（如 <code>#HasDoor != 1</code> 用于判断开放格时，自动生成层板内缩封边与背板美化工艺）。
             </p>
           </div>
         </div>
@@ -117,24 +117,24 @@ export const EqNeqDefinition: React.FC<EqNeqDefinitionProps> = () => {
           </h4>
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}>
             <div style={{ background: '#f8fafc', padding: '16px', borderRadius: '8px', border: '1px solid #e2e8f0' }}>
-              <div style={{ fontWeight: 700, color: '#0f172a', marginBottom: '8px' }}>情况 A：用户选配 #DoorType = 1（黑框玻璃门）</div>
+              <div style={{ fontWeight: 700, color: '#0f172a', marginBottom: '8px' }}>情况 A：用户选配 #HasDoor = 1（掩门封闭柜）</div>
               <div style={{ fontSize: '13px', color: '#475569', lineHeight: '1.8' }}>
                 • 等式判断：<code>1 == 1</code> 结果为 <strong>真（True）</strong>
                 <br />
-                • 模型动作：加载 4mm 钢化玻璃材质网格 + 四边 20mm 阳极氧化黑铝框。
+                • 模型动作：生成外掩柜门、金色极简五金拉手及阻尼铰链孔位。
                 <br />
-                • 联动五金：铰链自动切换为天地暗藏铰链，打孔点位从侧板移至顶底板。
+                • 空间体验：防尘私密、立面平整统一，适合衣物存放。
               </div>
             </div>
 
             <div style={{ background: '#f8fafc', padding: '16px', borderRadius: '8px', border: '1px solid #e2e8f0' }}>
-              <div style={{ fontWeight: 700, color: '#0f172a', marginBottom: '8px' }}>情况 B：用户选配 #DoorType = 0（肤感木质平板门）</div>
+              <div style={{ fontWeight: 700, color: '#0f172a', marginBottom: '8px' }}>情况 B：用户选配 #HasDoor = 0（开放式展示格）</div>
               <div style={{ fontSize: '13px', color: '#475569', lineHeight: '1.8' }}>
-                • 等式判断：<code>0 == 1</code> 结果为 <strong>假（False）</strong>
+                • 等式判断：<code>0 == 1</code> 结果为 <strong>假（False，即 #HasDoor != 1）</strong>
                 <br />
-                • 模型动作：隐藏玻璃和金属外框，渲染 18mm 实木颗粒免漆板。
+                • 模型动作：隐去门板，展示柜内多层活动隔板，方便拿取。
                 <br />
-                • 联动五金：生成 35mm 标准杯位烟斗铰链，预打孔位位于侧板 37mm 基准线。
+                • 空间体验：通透开阔，适合做书架、摆件展示与随手置物。
               </div>
             </div>
           </div>
@@ -155,9 +155,9 @@ export const EqNeqDefinition: React.FC<EqNeqDefinitionProps> = () => {
               🎯 这个公式可以用来做什么？
             </h4>
             <ul style={{ margin: 0, paddingLeft: '20px', fontSize: '14px', lineHeight: '1.9', color: '#334155' }}>
-                <li>门板材质（实木/玻璃/吸塑）材质网格快速切换；</li>
-                <li>拉手形态与预埋孔位排孔联动；</li>
-                <li>灯带槽与开孔几何显隐。</li>
+                <li><strong>形态开关控制</strong>：一键在“开放柜”与“掩门柜”之间无缝切换；</li>
+                <li><strong>下料清单动态增减</strong>：门板、铰链、拉手根据开关决定是否加入采购料单；</li>
+                <li><strong>同体双形态复用</strong>：同一套柜体外框模型，无需画两遍即可覆盖有门/无门两种方案。</li>
             </ul>
           </div>
 
@@ -175,9 +175,8 @@ export const EqNeqDefinition: React.FC<EqNeqDefinitionProps> = () => {
               💡 建模核心作用与工程价值
             </h4>
             <p style={{ margin: '0 0 12px 0', fontSize: '14px', lineHeight: '1.8', color: '#334155' }}>
-              通过枚举判断切换模型材质网格、显示槽位与五金孔位预留。
-            </p
-            >
+              <code>==</code> 与 <code>!=</code> 是参数化设计中最直白、最容易记住的布尔型“零件显隐闸门”。
+            </p>
             <div
               style={{
                 fontSize: '13px',
@@ -188,7 +187,7 @@ export const EqNeqDefinition: React.FC<EqNeqDefinitionProps> = () => {
                 fontWeight: 500,
               }}
             >
-              ✦ 场景示范：玻璃高显门与免拉手打孔（可在左侧切换进入【2. 3D 故事与交互演练】实时调节参数驱动模型）
+              ✦ 场景示范：开放格与带门柜一键切换（可在左侧切换进入【2. 3D 故事与交互演练】切换开关体验柜门显隐）
             </div>
           </div>
         </div>

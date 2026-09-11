@@ -87,18 +87,18 @@ export const SinCosDefinition: React.FC<SinCosDefinitionProps> = () => {
           </div>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', fontSize: '14px', lineHeight: '1.8', color: '#334155' }}>
             <p style={{ margin: 0 }}>
-              <strong>通俗一句话：</strong> <strong>“正弦余弦求圆周旋转轨迹（让物体转起来）：橱柜转角的小怪物飞碟转盘，随着旋转角度 θ 的变化，托盘的实时前后和左右位置就是靠 X = R·cos(θ) 和 Z = R·sin(θ) 精准算出，保证转盘沿着完美的圆形弧线滑出柜外。”</strong>
+              <strong>通俗一句话：</strong> <strong>“正弦余弦求圆周旋转轨迹（让家装门扇转起来）：现代极简满墙木饰面隐形门，随着开门角度 θ 的推开变化，门扇最外边缘在空间的实时前后进深和左右开合宽度就是靠 X = W·cos(θ) 和 Z = W·sin(θ) 精准算出，实时绘制门扇扫过的回转圆弧与安全扇区，防止撞坏后方家具与踢脚线。”</strong>
             </p>
             <p style={{ margin: 0, color: '#475569' }}>
               <strong>参数含义解析：</strong>
               <br />
-              • <code>R</code>：旋转臂或圆盘转动半径（单位 mm）。
+              • <code>W</code>：门扇物理宽度（即开门回转半径，如标准大单门 <code>860mm</code>）。
               <br />
-              • <code>θ (theta)</code>：当前旋转角度（如从 0° 旋转到 90°）。
+              • <code>θ (theta)</code>：当前开门角度（从 0° 完全闭合推开至 90° 完全展开）。
               <br />
-              • <code>cos(θ)</code>：控制水平 X 轴偏移（左右位移）。
+              • <code>cos(θ)</code>：控制横向开间占用（X 轴门扇横向宽度投影）。
               <br />
-              • <code>sin(θ)</code>：控制垂直进深 Z 轴偏移（前后滑出深度）。
+              • <code>sin(θ)</code>：控制纵向进深扫入深度（Z 轴开门空间探出占用）。
             </p>
           </div>
         </div>
@@ -119,37 +119,37 @@ export const SinCosDefinition: React.FC<SinCosDefinitionProps> = () => {
           </h4>
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '16px' }}>
             <div style={{ background: '#f8fafc', padding: '16px', borderRadius: '8px', border: '1px solid #e2e8f0' }}>
-              <div style={{ fontWeight: 700, color: '#0f172a', marginBottom: '8px' }}>阶段 1：初始闭合（旋转角度 θ = 0°）</div>
+              <div style={{ fontWeight: 700, color: '#0f172a', marginBottom: '8px' }}>阶段 1：绝对隐形闭合（开门角度 θ = 0°）</div>
               <div style={{ fontSize: '13px', color: '#475569', lineHeight: '1.8' }}>
-                • 设旋转半径 R = 350mm
+                • 门宽 W = 860mm
                 <br />
                 • 计算：<code>cos(0°) = 1</code>，<code>sin(0°) = 0</code>
                 <br />
-                • 坐标定位：<code>X = 350mm</code>，<code>Z = 0mm</code>
+                • 空间定位：<code>X = 860mm</code>，<code>Z = 0mm</code>
                 <br />
-                • 状态：转盘完全收纳于地柜深处，不凸出门缝。
+                • 状态：门扇完全平齐嵌入背景木饰面护墙板，严丝合缝，空间极简通透。
               </div>
             </div>
 
             <div style={{ background: '#f8fafc', padding: '16px', borderRadius: '8px', border: '1px solid #e2e8f0' }}>
-              <div style={{ fontWeight: 700, color: '#0f172a', marginBottom: '8px' }}>阶段 2：旋出中途（旋转角度 θ = 45°）</div>
+              <div style={{ fontWeight: 700, color: '#0f172a', marginBottom: '8px' }}>阶段 2：半开通行中途（开门角度 θ = 45°）</div>
               <div style={{ fontSize: '13px', color: '#475569', lineHeight: '1.8' }}>
                 • 计算：<code>cos(45°) ≈ 0.707</code>，<code>sin(45°) ≈ 0.707</code>
                 <br />
-                • 坐标定位：<code>X = 350 × 0.707 ≈ 247.5mm</code>，<code>Z = 247.5mm</code>
+                • 空间定位：<code>X ≈ 608mm</code>，<code>Z ≈ 608mm</code>
                 <br />
-                • 状态：转盘托着调料罐优雅滑行在拐角对角线上，避开柜门边框碰撞。
+                • 状态：门扇推开至 45°，实时推演地面圆弧轨迹，避免碰触侧方开关插座与花盆。
               </div>
             </div>
 
             <div style={{ background: '#f8fafc', padding: '16px', borderRadius: '8px', border: '1px solid #e2e8f0' }}>
-              <div style={{ fontWeight: 700, color: '#0f172a', marginBottom: '8px' }}>阶段 3：完全转出（旋转角度 θ = 90°）</div>
+              <div style={{ fontWeight: 700, color: '#0f172a', marginBottom: '8px' }}>阶段 3：完全敞开通行（开门角度 θ = 90°）</div>
               <div style={{ fontSize: '13px', color: '#475569', lineHeight: '1.8' }}>
                 • 计算：<code>cos(90°) = 0</code>，<code>sin(90°) = 1</code>
                 <br />
-                • 坐标定位：<code>X = 0mm</code>，<code>Z = 350mm</code>
+                • 空间定位：<code>X = 0mm</code>，<code>Z = 860mm</code>
                 <br />
-                • 状态：转盘全行程拉出柜外 350mm，物品一览无余，触手可及。
+                • 状态：横向门洞净开间 860mm 100% 释放，后方书房主卧畅行无阻。
               </div>
             </div>
           </div>
@@ -170,9 +170,9 @@ export const SinCosDefinition: React.FC<SinCosDefinitionProps> = () => {
               🎯 这个公式可以用来做什么？
             </h4>
             <ul style={{ margin: 0, paddingLeft: '20px', fontSize: '14px', lineHeight: '1.9', color: '#334155' }}>
-                <li>转角转篮、飞碟托盘圆周运动；</li>
-                <li>弧形旋转门及导轨跟随；</li>
-                <li>极坐标向空间笛卡尔三维坐标转换。</li>
+                <li>玄关旋转鞋架镜柱、悬臂旋转电视柱回转半径校核；</li>
+                <li>隐形门、折叠平开门开合轨迹防撞包络线推演；</li>
+                <li>极坐标向三维空间笛卡尔物理坐标系统转换。</li>
             </ul>
           </div>
 
@@ -187,10 +187,10 @@ export const SinCosDefinition: React.FC<SinCosDefinitionProps> = () => {
             }}
           >
             <h4 style={{ margin: '0 0 12px 0', fontSize: '16px', color: '#0f172a' }}>
-              💡 建模核心作用与工程价值
+              💡 家装设计与工程价值
             </h4>
             <p style={{ margin: '0 0 12px 0', fontSize: '14px', lineHeight: '1.8', color: '#334155' }}>
-              利用三角函数构建三维空间内的圆弧与旋转轨迹，驱动旋转门与五金机构动态模拟。
+              利用三角函数将旋转角度转化为空间物理坐标，用于家装动态旋转家具的无干涉运动模拟与空间避让。
             </p
             >
             <div
@@ -203,7 +203,7 @@ export const SinCosDefinition: React.FC<SinCosDefinitionProps> = () => {
                 fontWeight: 500,
               }}
             >
-              ✦ 场景示范：转角地柜飞碟转篮的丝滑盘旋（可在左侧切换进入【2. 3D 故事与交互演练】实时调节参数驱动模型）
+              ✦ 场景示范：意式玄关 360°旋转全身镜鞋架与避碰回转包络线（可在左侧切换进入【2. 3D 故事与交互演练】实时调节参数驱动模型）
             </div>
           </div>
         </div>

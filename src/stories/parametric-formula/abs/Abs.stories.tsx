@@ -3,7 +3,7 @@ import { AbsDefinition } from './AbsDefinition';
 import { AbsStoryScene } from './AbsStoryScene';
 
 const meta = {
-  title: '公式/数值运算/abs 绝对值',
+  title: '公式/数学与统计/abs 绝对值',
   parameters: {
     layout: 'fullscreen',
   },
@@ -21,19 +21,19 @@ export const 公式定义: StoryObj = {
 export const 故事演练: StoryObj = {
   name: '2. 3D 故事与交互演练',
   argTypes: {
-    offsetX: {
-      name: '墙柱偏移量(负代表左, 正代表右)',
+    deskOffset: {
+      name: '桌板双向悬挑偏移量 (#DeskOffset)',
       control: {
         type: 'range',
-        min: -200,
-        max: 200,
-        step: 10,
+        min: -500,
+        max: 500,
+        step: 20,
       },
-      description: '墙柱偏移量(负代表左, 正代表右)，在 Storybook Controls 中实时修改此值即可驱动 3D 变化',
+      description: '负数表示向左靠窗悬挑伸展，正数表示向右靠床悬挑伸展。通过 abs 取净跨度绝对值，超过 200mm 自动加装工字钢与灯带',
     },
   },
   args: {
-    offsetX: -120,
+    deskOffset: -350,
   },
   render: (args) => <AbsStoryScene {...args} />,
 };

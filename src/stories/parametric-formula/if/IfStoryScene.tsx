@@ -6,58 +6,128 @@ export interface IfStorySceneProps {
   w?: number;
 }
 
-const IfMesh: React.FC<IfStorySceneProps> = ({
-  w = 460,
+const IfDoorMesh: React.FC<IfStorySceneProps> = ({
+  w = 550,
 }) => {
+  // 比例映射：将实际 mm 转换为 Three.js 场景单位（以标准 600mm 为基准 1.5 单位）
+  const cabinetW = (w / 600) * 1.5;
+  const cabinetH = 2.4;
+  const cabinetD = 0.9;
+  const boardThick = 0.04;
 
-    const scaleW = w / 400;
-    const drawerDepth = w < 500 ? 350 / 300 : 450 / 300;
-    const isNarrow = w < 500;
-    return (
-      <group position={[0, -0.3, 0]}>
-        <mesh position={[0, 1.25, 0]}>
-          <boxGeometry args={[scaleW + 0.1, 0.06, 1.3]} />
-          <meshStandardMaterial color="#475569" roughness={0.3} />
-        </mesh>
-        <mesh position={[-scaleW / 2, 0.2, 0]}>
-          <boxGeometry args={[0.04, 2.0, 1.2]} />
-          <meshStandardMaterial color="#64748b" roughness={0.4} />
-        </mesh>
-        <mesh position={[scaleW / 2, 0.2, 0]}>
-          <boxGeometry args={[0.04, 2.0, 1.2]} />
-          <meshStandardMaterial color="#64748b" roughness={0.4} />
-        </mesh>
-        <mesh position={[0, 0.2, -0.58]}>
-          <boxGeometry args={[scaleW, 2.0, 0.02]} />
-          <meshStandardMaterial color="#cbd5e1" />
-        </mesh>
-        <mesh position={[0, 0.9, 0]}>
-          <cylinderGeometry args={[0.02, 0.02, scaleW * 0.95, 16]} rotation={[0, 0, Math.PI / 2]} />
-          <meshStandardMaterial color="#e2e8f0" metalness={0.8} roughness={0.2} />
-        </mesh>
-        <group position={[0, -0.45, (drawerDepth * 0.5) - 0.45]}>
-          <mesh>
-            <boxGeometry args={[scaleW * 0.92, 0.5, drawerDepth]} />
-            <meshStandardMaterial
-              color={isNarrow ? '#6366f1' : '#4338ca'}
-              metalness={0.3}
-              roughness={0.2}
-            />
-          </mesh>
-          <mesh position={[0, 0, drawerDepth / 2 + 0.03]}>
-            <boxGeometry args={[0.16, 0.02, 0.03]} />
-            <meshStandardMaterial color="#f8fafc" metalness={0.9} roughness={0.1} />
-          </mesh>
+  const isDoubleDoor = w > 600;
+  const doorCount = isDoubleDoor ? 2 : 1;
+
+  // 单扇门板尺寸计算
+  const doorGap = 0.01;
+  const doorHeight = cabinetH - boardThick * 2 - 0.02;
+  const doorWidth = isDoubleDoor
+    ? (cabinetW - boardThick * 2 - doorGap * 3) / 2
+    : cabinetW - boardThick * 2 - doorGap * 2;
+
+  // 内空起始位置
+  const innerLeft = -cabinetW / 2 + boardThick;
+
+  return (
+    <group position={[0, -0.2, 0]}>
+      {/* 顶板 */}
+      <mesh position={[0, cabinetH / 2 - boardThick / 2, 0]}>
+        <boxGeometry args={[cabinetW, boardThick, cabinetD]} />
+        <meshStandardMaterial color="#334155" roughness={0.4} />
+      </mesh>
+      {/* 底板 */}
+      <mesh position={[0, -cabinetH / 2 + boardThick / 2, 0]}>
+        <boxGeometry args={[cabinetW, boardThick, cabinetD]} />
+        <meshStandardMaterial color="#334155" roughness={0.4} />
+      </mesh>
+      {/* 左侧板 */}
+      <mesh position={[-cabinetW / 2 + boardThick / 2, 0, 0]}>
+        <boxGeometry args={[boardThick, cabinetH, cabinetD]} />
+        <meshStandardMaterial color="#475569" roughness={0.4} />
+      </mesh>
+      {/* 右侧板 */}
+      <mesh position={[cabinetW / 2 - boardThick / 2, 0, 0]}>
+        <boxGeometry args={[boardThick, cabinetH, cabinetD]} />
+        <meshStandardMaterial color="#475569" roughness={0.4} />
+      </mesh>
+      {/* 背板 */}
+      <mesh position={[0, 0, -cabinetD / 2 + 0.01]}>
+        <boxGeometry args={[cabinetW - boardThick * 2, cabinetH - boardThick * 2, 0.02]} />
+        <meshStandardMaterial color="#cbd5e1" roughness={0.5} />
+      </mesh>
+
+      {/* 内部活动层板 (中间放一块展示柜内结构) */}
+      <mesh position={[0, 0.1, 0]}>
+        <boxGeometry args={[cabinetW - boardThick * 2 - 0.01, boardThick, cabinetD - 0.05]} />
+        <meshStandardMaterial color="#64748b" roughness={0.4} />
+      </mesh>
+      <mesh position={[0, 0.7, 0]}>
+        <boxGeometry args={[cabinetW - boardThick * 2 - 0.01, boardThick, cabinetD - 0.05]} />
+        <meshStandardMaterial color="#64748b" roughness={0.4} />
+      </mesh>
+      <mesh position={[0, -0.5, 0]}>
+        <boxGeometry args={[cabinetW - boardThick * 2 - 0.01, boardThick, cabinetD - 0.05]} />
+        <meshStandardMaterial color="#64748b" roughness={0.4} />
+      </mesh>
+
+      {/* 门板系统 (if 条件判断的核心展示) */}
+      {isDoubleDoor ? (
+        // 双开门：左门与右门微开展示真实质感
+        <>
+          {/* 左门（带铰链轴心旋转微开 -25度） */}
+          <group position={[innerLeft + doorGap, 0, cabinetD / 2]}>
+            <group rotation={[0, -0.45, 0]}>
+              <mesh position={[doorWidth / 2, 0, boardThick / 2]}>
+                <boxGeometry args={[doorWidth, doorHeight, boardThick]} />
+                <meshStandardMaterial color="#6366f1" roughness={0.3} metalness={0.1} />
+              </mesh>
+              {/* 拉手 */}
+              <mesh position={[doorWidth - 0.05, 0, boardThick + 0.02]}>
+                <boxGeometry args={[0.015, 0.28, 0.03]} />
+                <meshStandardMaterial color="#fbbf24" metalness={0.8} roughness={0.2} />
+              </mesh>
+            </group>
+          </group>
+
+          {/* 右门（带铰链轴心旋转微开 +25度） */}
+          <group position={[cabinetW / 2 - boardThick - doorGap, 0, cabinetD / 2]}>
+            <group rotation={[0, 0.45, 0]}>
+              <mesh position={[-doorWidth / 2, 0, boardThick / 2]}>
+                <boxGeometry args={[doorWidth, doorHeight, boardThick]} />
+                <meshStandardMaterial color="#4f46e5" roughness={0.3} metalness={0.1} />
+              </mesh>
+              {/* 拉手 */}
+              <mesh position={[-doorWidth + 0.05, 0, boardThick + 0.02]}>
+                <boxGeometry args={[0.015, 0.28, 0.03]} />
+                <meshStandardMaterial color="#fbbf24" metalness={0.8} roughness={0.2} />
+              </mesh>
+            </group>
+          </group>
+        </>
+      ) : (
+        // 单开门（左开门，微开 -30度）
+        <group position={[innerLeft + doorGap, 0, cabinetD / 2]}>
+          <group rotation={[0, -0.52, 0]}>
+            <mesh position={[doorWidth / 2, 0, boardThick / 2]}>
+              <boxGeometry args={[doorWidth, doorHeight, boardThick]} />
+              <meshStandardMaterial color="#6366f1" roughness={0.3} metalness={0.1} />
+            </mesh>
+            {/* 拉手 */}
+            <mesh position={[doorWidth - 0.06, 0, boardThick + 0.02]}>
+              <boxGeometry args={[0.015, 0.32, 0.03]} />
+              <meshStandardMaterial color="#fbbf24" metalness={0.8} roughness={0.2} />
+            </mesh>
+          </group>
         </group>
-        <mesh position={[0, -0.78, 0]}>
-          <boxGeometry args={[scaleW, 0.12, 1.15]} />
-          <meshStandardMaterial color="#334155" />
-        </mesh>
-      </group>
-    );
+      )}
+    </group>
+  );
 };
 
 export const IfStoryScene: React.FC<IfStorySceneProps> = (props) => {
+  const currentW = props.w ?? 550;
+  const isDouble = currentW > 600;
+
   return (
     <div
       style={{
@@ -108,7 +178,7 @@ export const IfStoryScene: React.FC<IfStorySceneProps> = (props) => {
             boxShadow: '0 4px 12px -2px #6366f115',
           }}
         >
-          {"if(#W < 500, 350, 450)"}
+          {"if(#W > 600, 2, 1)"}
         </div>
       </div>
 
@@ -122,23 +192,59 @@ export const IfStoryScene: React.FC<IfStorySceneProps> = (props) => {
             background: 'radial-gradient(circle at 50% 40%, #ffffff 0%, #6366f108 65%, #6366f116 100%)',
           }}
         >
-          <Canvas camera={{ position: [0, 0.4, 5.2], fov: 38 }} gl={{ antialias: true }}>
+          <Canvas camera={{ position: [0, 0.4, 5.2], fov: 40 }} gl={{ antialias: true }}>
             <color attach="background" args={['#fafafa']} />
-            <ambientLight intensity={0.75} />
+            <ambientLight intensity={0.8} />
             <directionalLight position={[6, 10, 6]} intensity={1.3} castShadow />
             <directionalLight position={[-6, -4, -6]} intensity={0.3} />
-            <pointLight position={[0, 3, 2]} intensity={0.8} color="#818cf8" />
-            <IfMesh {...props} />
+            <pointLight position={[0, 2, 2.5]} intensity={0.6} color="#818cf8" />
+            <IfDoorMesh {...props} />
             <ContactShadows
-              position={[0, -1.1, 0]}
+              position={[0, -1.45, 0]}
               opacity={0.35}
               scale={7}
               blur={2}
               far={3}
               color="#6366f1"
             />
-            <OrbitControls target={[0, 0.1, 0]} enableZoom={true} maxPolarAngle={Math.PI / 2 + 0.05} />
+            <OrbitControls target={[0, -0.1, 0]} enableZoom={true} maxPolarAngle={Math.PI / 2 + 0.05} />
           </Canvas>
+
+          {/* 实时状态浮窗 */}
+          <div
+            style={{
+              position: 'absolute',
+              top: '16px',
+              left: '20px',
+              background: 'rgba(255, 255, 255, 0.95)',
+              backdropFilter: 'blur(10px)',
+              border: '1px solid #e2e8f0',
+              padding: '12px 18px',
+              borderRadius: '10px',
+              boxShadow: '0 4px 14px rgba(0,0,0,0.06)',
+              fontSize: '13px',
+              color: '#334155',
+            }}
+          >
+            <div style={{ fontWeight: 700, color: '#0f172a', marginBottom: '6px' }}>
+              当前柜宽：<span style={{ color: '#6366f1' }}>{currentW} mm</span>
+            </div>
+            <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
+              <span>条件 <code>#W &gt; 600</code>：</span>
+              <span
+                style={{
+                  fontWeight: 700,
+                  color: isDouble ? '#16a34a' : '#ea580c',
+                  background: isDouble ? '#dcfce7' : '#ffedd5',
+                  padding: '2px 8px',
+                  borderRadius: '4px',
+                }}
+              >
+                {isDouble ? '成立 (True) → 2 扇对开门' : '不成立 (False) → 1 扇单开门'}
+              </span>
+            </div>
+          </div>
+
           <div
             style={{
               position: 'absolute',
@@ -180,7 +286,7 @@ export const IfStoryScene: React.FC<IfStorySceneProps> = (props) => {
                 color: '#0f172a',
               }}
             >
-              📖 业务故事：窄道玄关柜与抽屉避让
+              📖 业务故事：柜体宽度驱动单/双门自适应
             </h4>
             <p
               style={{
@@ -190,9 +296,8 @@ export const IfStoryScene: React.FC<IfStorySceneProps> = (props) => {
                 color: '#475569',
               }}
             >
-              客户家玄关空间狭长。小宇设定：当柜体宽度 #W 小于 500mm 时，抽屉深度自动收缩为 350mm 灵巧避门；一旦扩宽至 500mm 以上，深抽屉立即延展到 450mm 扩容大收纳。
-            </p
-            >
+              单扇掩门超过 600mm 会造成合页负荷过重而下垂，小宇设定：当柜体宽度 #W 超过 600mm 时，系统自动自适应拆为 2 扇对开门；≤ 600mm 时保持 1 扇单开门。在右侧 Controls 拖动宽度滑块，观察门板在 600mm 边界处的智能分扇！
+            </p>
           </div>
           <div
             style={{
@@ -206,7 +311,7 @@ export const IfStoryScene: React.FC<IfStorySceneProps> = (props) => {
             }}
           >
             <strong>💡 联动价值：</strong>
-            通过条件判断，使同一套柜体模型在不同空间尺寸下自动切换组件规格，免去人工重做模型的繁琐。
+            设计师直接拉伸柜体总宽，工艺底线与分扇规则自动触发，既保证五金结构安全，又杜绝了漏改门数的拆单错误。
           </div>
         </div>
       </div>

@@ -25,15 +25,15 @@ export const 故事演练: StoryObj = {
       name: '柜体宽度 (#W)',
       control: {
         type: 'range',
-        min: 300,
-        max: 800,
+        min: 350,
+        max: 1000,
         step: 10,
       },
-      description: '柜体宽度 (#W)，在 Storybook Controls 中实时修改此值即可驱动 3D 变化',
+      description: '柜体宽度 (#W)，临界点 600mm：<=600 为单开门，>600 自动切换为对开双门',
     },
   },
   args: {
-    w: 460,
+    w: 550,
   },
   render: (args) => <IfStoryScene {...args} />,
 };

@@ -53,7 +53,7 @@ export const BoolAtDefinition: React.FC<BoolAtDefinitionProps> = () => {
             boxShadow: '0 4px 12px -2px #0d948815',
           }}
         >
-          BoolAt(#Selected, [0, 1, 2])
+          BoolAt(#Modules, [1, 2, 3])
         </div>
       </div>
 
@@ -83,20 +83,20 @@ export const BoolAtDefinition: React.FC<BoolAtDefinitionProps> = () => {
               marginBottom: '16px',
             }}
           >
-            BoolAt(#Selected, [0, 1, 2])
+            BoolAt(#Modules, [1, 2, 3])
           </div>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', fontSize: '14px', lineHeight: '1.8', color: '#334155' }}>
             <p style={{ margin: 0 }}>
-              <strong>通俗一句话：</strong> <strong>“套系精确命中判断（不多不少完全吻合）：检验所选清单与官方标准套餐是否丝毫不差完全对齐。例如工厂推出‘尊享厨电三件套 [0, 1, 2]’，必须且只能选中这3项，系统才会激活连体激光无缝封边与隐藏式插座模组，多选或少选都不会误触发。”</strong>
+              <strong>通俗一句话：</strong> <strong>“套系精准全量命中（不多、不少、不夹带杂件）：检测选配清单是否与官方‘豪华衣帽间三件套 [1-挂衣区, 2-首饰抽, 3-玻璃柜]’完全吻合。只有不多不少精准凑齐这 3 大件，系统才触发全柜内嵌智能氛围灯光系统与金色金属型材收口；多选或漏选都只按普通柜体排产。”</strong>
             </p>
             <p style={{ margin: 0, color: '#475569' }}>
               <strong>参数含义解析：</strong>
               <br />
-              • <code>#Selected</code>：用户实际多选的组件编号数组。
+              • <code>#Modules</code>：客户实际选配勾选的定制功能模块编号列表。
               <br />
-              • <code>[0, 1, 2]</code>：官方定义的严格套餐组合模板列表。
+              • <code>[1, 2, 3]</code>：高定官方尊享套餐的严格组合白名单（1: 长大衣挂衣区配西装大衣与衣架，2: 爱马仕橙丝绒双层首饰手表抽与推拉西裤架，3: 极窄铝框茶玻展示高柜配名品陈列）。
               <br />
-              • 返回值：布尔值 <code>true</code> 或 <code>false</code>。要求集合元素完全对称相等，严密防止非标混搭引起的生产工艺冲突。
+              • <code>BoolAt(...)</code>：严格集合比对函数。返回 <code>true</code> 或 <code>false</code>。必须数量与项目完全一致才为真。
             </p>
           </div>
         </div>
@@ -117,35 +117,35 @@ export const BoolAtDefinition: React.FC<BoolAtDefinitionProps> = () => {
           </h4>
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '16px' }}>
             <div style={{ background: '#f8fafc', padding: '16px', borderRadius: '8px', border: '1px solid #e2e8f0' }}>
-              <div style={{ fontWeight: 700, color: '#0f172a', marginBottom: '8px' }}>情况 A：用户选配 #Selected = [0, 1, 2]（精准套餐）</div>
+              <div style={{ fontWeight: 700, color: '#0f172a', marginBottom: '8px' }}>情况 A：选配 [1, 2, 3]（满配大满贯）</div>
               <div style={{ fontSize: '13px', color: '#475569', lineHeight: '1.8' }}>
-                • 比较校验：选配列表与目标套系 <code>[0, 1, 2]</code> 完全一一对应
+                • 集合比对：<code>[1, 2, 3]</code> 与 <code>[1, 2, 3]</code> 丝毫不差
                 <br />
-                • BoolAt 判定：<strong>True</strong>
+                • BoolAt 判定：<strong>True（命中尊享套餐）</strong>
                 <br />
-                • 联动响应：自动绑定官方套餐专属的激光封边打标、隐藏式排插模块及赠品五金装配包。
+                • 3D 联动动作：<strong>全柜内嵌暖色智能灯光瞬间全亮</strong>，层板前沿与玻璃柜边缘浮现金色铝合金型材，质感飙升！
               </div>
             </div>
 
             <div style={{ background: '#f8fafc', padding: '16px', borderRadius: '8px', border: '1px solid #e2e8f0' }}>
-              <div style={{ fontWeight: 700, color: '#0f172a', marginBottom: '8px' }}>情况 B：用户选配 #Selected = [0, 1]（少选了 2 号）</div>
+              <div style={{ fontWeight: 700, color: '#0f172a', marginBottom: '8px' }}>情况 B：选配 [1, 2]（漏选 3 号玻璃柜）</div>
               <div style={{ fontSize: '13px', color: '#475569', lineHeight: '1.8' }}>
-                • 比较校验：缺少 2 号关键组件
+                • 集合比对：缺少 3 号玻璃展示柜
                 <br />
-                • BoolAt 判定：<strong>False</strong>
+                • BoolAt 判定：<strong>False（未集齐套餐）</strong>
                 <br />
-                • 联动响应：不触发套系专属工艺，按普通单独散件排产，避免现场安装时接口悬空。
+                • 3D 联动动作：未触发整套灯带系统，保持基础常规木质柜体排产，避免安装变压器时电线回路不匹配。
               </div>
             </div>
 
             <div style={{ background: '#f8fafc', padding: '16px', borderRadius: '8px', border: '1px solid #e2e8f0' }}>
-              <div style={{ fontWeight: 700, color: '#0f172a', marginBottom: '8px' }}>情况 C：用户选配 #Selected = [0, 1, 2, 5]（多加了散件）</div>
+              <div style={{ fontWeight: 700, color: '#0f172a', marginBottom: '8px' }}>情况 C：选配 [1, 2, 3, 4]（多加了其它散件）</div>
               <div style={{ fontSize: '13px', color: '#475569', lineHeight: '1.8' }}>
-                • 比较校验：虽然包含了 0,1,2，但额外夹带了 5 号异形散件
+                • 集合比对：虽然包含 1,2,3，但混搭了 4 号散件
                 <br />
-                • BoolAt 判定：<strong>False</strong>
+                • BoolAt 判定：<strong>False（非官方标配）</strong>
                 <br />
-                • 联动响应：拒绝自动套用标准固模，提示需经由拆单工程师复核。
+                • 3D 联动动作：不套用固定封边与开孔模版，自动转入非标定制审核流程。
               </div>
             </div>
           </div>
@@ -166,9 +166,9 @@ export const BoolAtDefinition: React.FC<BoolAtDefinitionProps> = () => {
               🎯 这个公式可以用来做什么？
             </h4>
             <ul style={{ margin: 0, paddingLeft: '20px', fontSize: '14px', lineHeight: '1.9', color: '#334155' }}>
-                <li>促销组合套系校验，不多不少完全相符时触发专属封边工艺；</li>
-                <li>固定款型门板与五金包的排他性装配检查；</li>
-                <li>避免用户漏选或错选组件造成生产端打件混乱。</li>
+                <li><strong>营销爆款套餐精准核销</strong>：不多不少完全满足时自动赠送专属高级灯光配件；</li>
+                <li><strong>非标混搭拦截</strong>：防止销售人员为了凑单乱搭配件导致工厂电路与结构打架；</li>
+                <li><strong>一键升级高定质感</strong>：把离散零件的简单拼合转化为具有整套灵魂的高定空间。</li>
             </ul>
           </div>
 
@@ -186,9 +186,8 @@ export const BoolAtDefinition: React.FC<BoolAtDefinitionProps> = () => {
               💡 建模核心作用与工程价值
             </h4>
             <p style={{ margin: '0 0 12px 0', fontSize: '14px', lineHeight: '1.8', color: '#334155' }}>
-              严格判定两组选项完全相等，用于限定款、套餐包与专属特定工艺的绝对匹配。
-            </p
-            >
+              <code>BoolAt</code> 是集合论在参数化设计中的极致应用。它守护的是工业生产的“严格组合套系契约”，让成套化销售与专属先进制造无缝咬合。
+            </p>
             <div
               style={{
                 fontSize: '13px',
@@ -199,7 +198,7 @@ export const BoolAtDefinition: React.FC<BoolAtDefinitionProps> = () => {
                 fontWeight: 500,
               }}
             >
-              ✦ 场景示范：初春限定尊享套餐与一体封边（可在左侧切换进入【2. 3D 故事与交互演练】实时调节参数驱动模型）
+              ✦ 场景示范：三大件全选齐触发全柜内嵌奢华灯带（可在左侧切换进入【2. 3D 故事与交互演练】勾选模块体验大满配）
             </div>
           </div>
         </div>

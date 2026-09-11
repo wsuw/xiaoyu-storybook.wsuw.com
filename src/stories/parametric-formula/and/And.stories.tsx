@@ -21,30 +21,30 @@ export const 公式定义: StoryObj = {
 export const 故事演练: StoryObj = {
   name: '2. 3D 故事与交互演练',
   argTypes: {
-    w: {
-      name: '书架总宽 (#W)',
+    h: {
+      name: '门板高度 (#H)',
       control: {
         type: 'range',
-        min: 400,
-        max: 900,
-        step: 20,
+        min: 1600,
+        max: 2700,
+        step: 50,
       },
-      description: '书架总宽 (#W)，在 Storybook Controls 中实时修改此值即可驱动 3D 变化',
+      description: '衣柜单门高度 (#H，单位 mm)。>= 2400 时满足超高条件',
     },
-    d: {
-      name: '书架进深 (#D)',
+    w: {
+      name: '门板宽度 (#W)',
       control: {
         type: 'range',
-        min: 250,
-        max: 500,
+        min: 350,
+        max: 700,
         step: 10,
       },
-      description: '书架进深 (#D)，在 Storybook Controls 中实时修改此值即可驱动 3D 变化',
+      description: '衣柜单门宽度 (#W，单位 mm)。>= 500 时满足超宽条件',
     },
   },
   args: {
-    w: 680,
-    d: 420,
+    h: 2500,
+    w: 550,
   },
   render: (args) => <AndStoryScene {...args} />,
 };

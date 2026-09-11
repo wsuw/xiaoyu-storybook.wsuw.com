@@ -21,19 +21,19 @@ export const 公式定义: StoryObj = {
 export const 故事演练: StoryObj = {
   name: '2. 3D 故事与交互演练',
   argTypes: {
-    roofAngle: {
-      name: '屋顶倾角 (#RoofAngle)',
+    stairAngle: {
+      name: '楼梯踏步坡度角 (θ°)',
       control: {
         type: 'range',
-        min: 10,
-        max: 50,
+        min: 25,
+        max: 45,
         step: 1,
       },
-      description: '屋顶倾角 (#RoofAngle)，在 Storybook Controls 中实时修改此值即可驱动 3D 变化',
+      description: '楼梯整体倾斜坡度角 (θ)，在 Storybook Controls 中实时修改此值即可驱动阶梯柜高度与楼梯斜梁联动',
     },
   },
   args: {
-    roofAngle: 28,
+    stairAngle: 32,
   },
   render: (args) => <TanStoryScene {...args} />,
 };

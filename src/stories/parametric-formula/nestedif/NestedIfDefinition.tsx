@@ -53,7 +53,7 @@ export const NestedIfDefinition: React.FC<NestedIfDefinitionProps> = () => {
             boxShadow: '0 4px 12px -2px #8b5cf615',
           }}
         >
-          {"nestedif(#D<=350, 250, #D<=400, 300, 350)"}
+          {"nestedif(#W <= 800, 1, #W <= 1500, 2, #W <= 2200, 3, 4)"}
         </div>
       </div>
 
@@ -84,21 +84,23 @@ export const NestedIfDefinition: React.FC<NestedIfDefinitionProps> = () => {
               marginBottom: '16px',
             }}
           >
-            {"nestedif(#D<=350, 250, #D<=400, 300, 350)"}
+            {"nestedif(#W <= 800, 1, #W <= 1500, 2, #W <= 2200, 3, 4)"}
           </div>
 
           <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', fontSize: '14px', lineHeight: '1.8', color: '#334155' }}>
             <p style={{ margin: 0 }}>
-              <strong>通俗一句话：</strong> <strong>“阶梯多档匹配：超浅柜配250滑轨，中深配300滑轨，更深配350滑轨。一行公式搞定多级分档，不用写一堆乱七八糟的嵌套括号。”</strong>
+              <strong>通俗一句话：</strong> <strong>“柜子拉伸多宽，就阶梯分出几个单元腔体：小柜单腔、中柜分双腔、大柜分三腔、超宽大柜分四腔！”</strong>
             </p>
             <p style={{ margin: 0, color: '#475569' }}>
-              <strong>参数含义解析（成对判断，最后是保底默认值）：</strong>
+              <strong>参数含义解析（条件-返回值成对平铺，末尾是默认兜底值）：</strong>
               <br />
-              • <code>#D &lt;= 350, 250</code>：第一档。如果柜深 ≤ 350mm，选配 250mm 迷你滑轨/托架。
+              • <code>#W &lt;= 800, 1</code>：第一档。如果柜宽 ≤ 800mm，不设中立板，作为 <strong>1 个独立大通腔</strong>。
               <br />
-              • <code>#D &lt;= 400, 300</code>：第二档。否则如果柜深 ≤ 400mm，选配 300mm 标准滑轨。
+              • <code>#W &lt;= 1500, 2</code>：第二档。柜宽在 801~1500mm 时，立起 1 块立板，均分为 <strong>2 个单元腔</strong>。
               <br />
-              • <code>350</code>：保底兜底值。都不满足（说明柜深 &gt; 400mm），直接选配 350mm 加长深滑轨。
+              • <code>#W &lt;= 2200, 3</code>：第三档。柜宽在 1501~2200mm 时，立起 2 块立板，均分为 <strong>3 个单元腔</strong>。
+              <br />
+              • <code>4</code>：最终兜底。柜宽 &gt; 2200mm（大型整墙衣柜），自动拆分为 <strong>4 个单元腔</strong>（立起 3 块立板），杜绝层板跨度超标下塌。
             </p>
           </div>
         </div>
@@ -115,31 +117,39 @@ export const NestedIfDefinition: React.FC<NestedIfDefinitionProps> = () => {
           }}
         >
           <h4 style={{ margin: '0 0 14px 0', fontSize: '16px', color: '#0f172a', display: 'flex', alignItems: 'center', gap: '8px' }}>
-            🔢 直观计算举例（三档阶梯实测）
+            🔢 直观计算举例（四大阶梯档位实测）
           </h4>
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '14px' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr 1fr', gap: '12px' }}>
             <div style={{ background: '#f8fafc', padding: '14px', borderRadius: '8px', border: '1px solid #e2e8f0' }}>
-              <div style={{ fontWeight: 700, color: '#0f172a', marginBottom: '6px' }}>档位 1：柜深 330mm</div>
+              <div style={{ fontWeight: 700, color: '#0f172a', marginBottom: '6px' }}>档位 1：柜宽 650mm</div>
               <div style={{ fontSize: '13px', color: '#475569', lineHeight: '1.7' }}>
-                • 命中：<code>330 &lt;= 350</code>
+                • 命中：<code>650 &lt;= 800</code>
                 <br />
-                • 结果：选用 <strong>250mm</strong> 迷你滑轨，紧凑防碰背板。
+                • 结果：<strong>1 个大通腔</strong>，无立板，收纳大物件。
               </div>
             </div>
             <div style={{ background: '#f8fafc', padding: '14px', borderRadius: '8px', border: '1px solid #e2e8f0' }}>
-              <div style={{ fontWeight: 700, color: '#0f172a', marginBottom: '6px' }}>档位 2：柜深 380mm</div>
+              <div style={{ fontWeight: 700, color: '#0f172a', marginBottom: '6px' }}>档位 2：柜宽 1200mm</div>
               <div style={{ fontSize: '13px', color: '#475569', lineHeight: '1.7' }}>
-                • 命中：<code>380 &lt;= 400</code>
+                • 命中：<code>1200 &lt;= 1500</code>
                 <br />
-                • 结果：选用 <strong>300mm</strong> 中型滑轨，稳定承重。
+                • 结果：拆为 <strong>2 腔（左右各 600）</strong>，立起 1 块中立板。
               </div>
             </div>
             <div style={{ background: '#f8fafc', padding: '14px', borderRadius: '8px', border: '1px solid #e2e8f0' }}>
-              <div style={{ fontWeight: 700, color: '#0f172a', marginBottom: '6px' }}>档位 3：柜深 500mm</div>
+              <div style={{ fontWeight: 700, color: '#0f172a', marginBottom: '6px' }}>档位 3：柜宽 1800mm</div>
               <div style={{ fontSize: '13px', color: '#475569', lineHeight: '1.7' }}>
-                • 走入默认：<code>&gt; 400mm</code>
+                • 命中：<code>1800 &lt;= 2200</code>
                 <br />
-                • 结果：自动采用 <strong>350mm</strong> 满格大滑轨，抽拉行程更长。
+                • 结果：拆为 <strong>3 腔（三等分）</strong>，立起 2 块中立板。
+              </div>
+            </div>
+            <div style={{ background: '#f8fafc', padding: '14px', borderRadius: '8px', border: '1px solid #e2e8f0' }}>
+              <div style={{ fontWeight: 700, color: '#0f172a', marginBottom: '6px' }}>档位 4：柜宽 2400mm</div>
+              <div style={{ fontSize: '13px', color: '#475569', lineHeight: '1.7' }}>
+                • 兜底：<code>&gt; 2200mm</code>
+                <br />
+                • 结果：自动拆为 <strong>4 腔大衣柜墙</strong>，立起 3 块中立板！
               </div>
             </div>
           </div>
@@ -161,9 +171,9 @@ export const NestedIfDefinition: React.FC<NestedIfDefinitionProps> = () => {
               🎯 这个公式可以用来做什么？
             </h4>
             <ul style={{ margin: 0, paddingLeft: '20px', fontSize: '14px', lineHeight: '1.9', color: '#334155' }}>
-              <li><strong>五金多规格阶梯换型</strong>：滑轨长短、铰链阻尼力矩（轻/中/重载）阶梯映射；</li>
-              <li><strong>多层阶梯价格规则匹配</strong>：按投影面积或深度阶梯自动归入对应的生产料工费标准；</li>
-              <li><strong>消除嵌套括号地狱</strong>：传统代码需要 <code>if(..., if(..., if(...)))</code>，用 <code>nestedif</code> 平铺易读易改。</li>
+              <li><strong>结构承重安全兜底</strong>：定制板材跨度不能超过 800mm（否则层板必弯），阶梯自动补立柱；</li>
+              <li><strong>整墙柜体模块化自适应</strong>：无需设计师反复插入单元柜，拉伸总宽，腔体排布自动演进；</li>
+              <li><strong>告别括号嵌套地狱</strong>：取代 <code>if(..., if(..., if(...)))</code>，多分支平铺直叙，清晰健壮。</li>
             </ul>
           </div>
 
@@ -181,7 +191,7 @@ export const NestedIfDefinition: React.FC<NestedIfDefinitionProps> = () => {
               💡 建模核心作用与工程价值
             </h4>
             <p style={{ margin: '0 0 12px 0', fontSize: '14px', lineHeight: '1.8', color: '#334155' }}>
-              直观表达现实制造业中典型的“阶梯型标准件选配规则”，配置清晰明了，便于企业产研与工艺库长效维护。
+              <code>nestedif</code> 是多档位分级系统的终极利器。当输入变量跨度大（如柜宽从 500mm 到 2600mm）时，能让单一模型实现质的阶梯级结构跃迁。
             </p>
             <div
               style={{
@@ -193,7 +203,7 @@ export const NestedIfDefinition: React.FC<NestedIfDefinitionProps> = () => {
                 fontWeight: 500,
               }}
             >
-              ✦ 场景示范：铰链阻尼三档无缝适配（可在左侧切换进入【2. 3D 故事与交互演练】拖动 d 深度观察三个阶梯的跳变）
+              ✦ 场景示范：柜宽驱动 1~4 单元分腔（可在左侧切换进入【2. 3D 故事与交互演练】拖动柜宽从 600 到 2400 观察结构立板变化）
             </div>
           </div>
         </div>

@@ -21,19 +21,32 @@ export const 公式定义: StoryObj = {
 export const 故事演练: StoryObj = {
   name: '2. 3D 故事与交互演练',
   argTypes: {
-    packageId: {
-      name: '套餐匹配码(输入3触发严格限定版)',
+    hasHanger: {
+      name: '模块 1: 长衣大衣悬挂区',
       control: {
-        type: 'range',
-        min: 1,
-        max: 5,
-        step: 1,
+        type: 'boolean',
       },
-      description: '套餐匹配码(输入3触发严格限定版)，在 Storybook Controls 中实时修改此值即可驱动 3D 变化',
+      description: '模块编号 1：长衣挂衣杆、木质衣架与西装大衣、底部皮质鞋包台',
+    },
+    hasJewelry: {
+      name: '模块 2: 丝绒手表首饰抽+裤架',
+      control: {
+        type: 'boolean',
+      },
+      description: '模块编号 2：爱马仕橙丝绒首饰多宝格大抽屉与推拉西裤架',
+    },
+    hasGlass: {
+      name: '模块 3: 铝框茶玻展示高柜',
+      control: {
+        type: 'boolean',
+      },
+      description: '模块编号 3：极窄黑钛茶色玻璃门展示柜与名包香水陈列',
     },
   },
   args: {
-    packageId: 3,
+    hasHanger: true,
+    hasJewelry: true,
+    hasGlass: true,
   },
   render: (args) => <BoolAtStoryScene {...args} />,
 };

@@ -53,7 +53,7 @@ export const OrDefinition: React.FC<OrDefinitionProps> = () => {
             boxShadow: '0 4px 12px -2px #ea580c15',
           }}
         >
-          {"if(#H > 2400 or #W > 800, 25, 18)"}
+          {"if(#H > 2000 or #W > 600, 1, 0)"}
         </div>
       </div>
 
@@ -83,22 +83,22 @@ export const OrDefinition: React.FC<OrDefinitionProps> = () => {
               marginBottom: '16px',
             }}
           >
-            {"if(#H > 2400 or #W > 800, 25, 18)"}
+            {"if(#H > 2000 or #W > 600, 1, 0)"}
           </div>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', fontSize: '14px', lineHeight: '1.8', color: '#334155' }}>
             <p style={{ margin: 0 }}>
-              <strong>通俗一句话：</strong> <strong>“或条件（满足任意一个就触发）：柜体只要高度超过2.4米，或者宽度超过0.8米，任何一项超标就必须将板材厚度升级为25mm重载厚板，否则维持18mm常规板。”</strong>
+              <strong>通俗一句话：</strong> <strong>“或条件（任一满足即生效）：门板高度一旦超过2米（一门到顶），或者门板宽度超过0.6米（横向受力大），只要占了任意一项，背后就必须强制嵌装一整根金属防弯拉直器！”</strong>
             </p>
             <p style={{ margin: 0, color: '#475569' }}>
               <strong>参数含义解析：</strong>
               <br />
-              • <code>#H &gt; 2400</code>：高度超标检查。超高门板或侧板长条极易受自重和应力弯曲。
+              • <code>#H &gt; 2000</code>：高度超标触发条件。门板过高极易受重力下坠与四季温湿度交替导致纵向拱曲。
               <br />
-              • <code>or</code>：逻辑或连接词。前后条件只要有一个成立（为真），整个判断就成立。
+              • <code>or</code>：逻辑或连接词。只要左边或右边任意一个条件为真（True），判断立刻成立。
               <br />
-              • <code>#W &gt; 800</code>：宽度超标检查。跨度过宽容易承重下陷变形。
+              • <code>#W &gt; 600</code>：宽度超标触发条件。单门过宽横向力矩剧增，门板极易翘曲变形。
               <br />
-              • <code>25, 18</code>：若满足任一超标则采用 25mm 加厚板抗弯；若两者均未超标，采用标准 18mm 板材。
+              • <code>1, 0</code>：成立时输出 <code>1</code>（门背强制开槽嵌装通体金属拉直器）；都不满足输出 <code>0</code>（标准小柜门无需拉直器）。
             </p>
           </div>
         </div>
@@ -119,35 +119,35 @@ export const OrDefinition: React.FC<OrDefinitionProps> = () => {
           </h4>
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '16px' }}>
             <div style={{ background: '#f8fafc', padding: '16px', borderRadius: '8px', border: '1px solid #e2e8f0' }}>
-              <div style={{ fontWeight: 700, color: '#0f172a', marginBottom: '8px' }}>情况 A：高 2700mm，宽 600mm（超高一门到顶）</div>
+              <div style={{ fontWeight: 700, color: '#0f172a', marginBottom: '8px' }}>情况 A：高 2400mm，宽 450mm（一门到顶细长门）</div>
               <div style={{ fontSize: '13px', color: '#475569', lineHeight: '1.8' }}>
-                • 校验：<code>2700 &gt; 2400 (真)</code>，宽 600 未超标
+                • 校验：<code>2400 &gt; 2000 (真)</code>，宽 450 未超标
                 <br />
-                • or 计算：<strong>真（True，只要有一项超标）</strong>
+                • or 计算：<strong>真（True，高度单项超标触发）</strong>
                 <br />
-                • 结果板厚：<strong>25mm</strong>。防止超高板材日后弯曲拱起，自动升级。
+                • 结果配置：<strong>强制嵌装 1 根金属拉直器</strong>，强力拉直防止门板变弯翘头。
               </div>
             </div>
 
             <div style={{ background: '#f8fafc', padding: '16px', borderRadius: '8px', border: '1px solid #e2e8f0' }}>
-              <div style={{ fontWeight: 700, color: '#0f172a', marginBottom: '8px' }}>情况 B：高 2000mm，宽 900mm（超宽地柜/书柜）</div>
+              <div style={{ fontWeight: 700, color: '#0f172a', marginBottom: '8px' }}>情况 B：高 1600mm，宽 750mm（矮胖宽单开门）</div>
               <div style={{ fontSize: '13px', color: '#475569', lineHeight: '1.8' }}>
-                • 校验：高未超标，但 <code>900 &gt; 800 (真)</code>
+                • 校验：高未超标，但 <code>750 &gt; 600 (真)</code>
                 <br />
-                • or 计算：<strong>真（True）</strong>
+                • or 计算：<strong>真（True，宽度单项超标触发）</strong>
                 <br />
-                • 结果板厚：<strong>25mm</strong>。宽跨度受重力极易塌腰，自动加厚。
+                • 结果配置：<strong>强制嵌装 1 根金属拉直器</strong>，化解门扇宽幅应力扭曲。
               </div>
             </div>
 
             <div style={{ background: '#f8fafc', padding: '16px', borderRadius: '8px', border: '1px solid #e2e8f0' }}>
-              <div style={{ fontWeight: 700, color: '#0f172a', marginBottom: '8px' }}>情况 C：高 2100mm，宽 600mm（常规标准柜）</div>
+              <div style={{ fontWeight: 700, color: '#0f172a', marginBottom: '8px' }}>情况 C：高 1500mm，宽 450mm（常规小地柜门）</div>
               <div style={{ fontSize: '13px', color: '#475569', lineHeight: '1.8' }}>
-                • 校验：<code>2100 &gt; 2400 (假)</code> 且 <code>600 &gt; 800 (假)</code>
+                • 校验：<code>1500 &gt; 2000 (假)</code> 且 <code>450 &gt; 600 (假)</code>
                 <br />
-                • or 计算：<strong>假（False，两项都不超标）</strong>
+                • or 计算：<strong>假（False，两项指标均在安全范围）</strong>
                 <br />
-                • 结果板厚：<strong>18mm</strong>。经济适用，无需额外加厚增加成本。
+                • 结果配置：<strong>0 根拉直器</strong>。普通门板即可稳定运行，避免增加加工开槽成本。
               </div>
             </div>
           </div>
@@ -168,9 +168,9 @@ export const OrDefinition: React.FC<OrDefinitionProps> = () => {
               🎯 这个公式可以用来做什么？
             </h4>
             <ul style={{ margin: 0, paddingLeft: '20px', fontSize: '14px', lineHeight: '1.9', color: '#334155' }}>
-                <li>任一维度超标（超高、超宽）自动升级板厚；</li>
-                <li>杜绝单项指标忽视带来的变形风险；</li>
-                <li>自动化品控拦截。</li>
+                <li><strong>多重工艺红线双保险</strong>：无论是“一门到顶”还是“超宽门”，任意超标自动补救；</li>
+                <li><strong>CNC 加工自动加槽</strong>：驱动机加工自动在门板背面生成通长拉直器铝槽及安装孔；</li>
+                <li><strong>杜绝漏加五金索赔</strong>：把设计师脑中的经验经验变成硬性公式，杜绝售后弯门下垂事故。</li>
             </ul>
           </div>
 
@@ -188,9 +188,8 @@ export const OrDefinition: React.FC<OrDefinitionProps> = () => {
               💡 建模核心作用与工程价值
             </h4>
             <p style={{ margin: '0 0 12px 0', fontSize: '14px', lineHeight: '1.8', color: '#334155' }}>
-              设置多重安全阈值。任意单一指标超标即可触发防护机制，防止设计出缺陷产品。
-            </p
-            >
+              <code>or</code> 逻辑常用于“工业安全防线”与“质量红线”。只要触发任何一种危险工况，系统就能立刻自动补全加强结构！
+            </p>
             <div
               style={{
                 fontSize: '13px',
@@ -201,7 +200,7 @@ export const OrDefinition: React.FC<OrDefinitionProps> = () => {
                 fontWeight: 500,
               }}
             >
-              ✦ 场景示范：超高或超宽的侧板厚度升级（可在左侧切换进入【2. 3D 故事与交互演练】实时调节参数驱动模型）
+              ✦ 场景示范：超高或超宽自动嵌装金属拉直器（可在左侧切换进入【2. 3D 故事与交互演练】拖动门板高/宽，观察拉直器出现）
             </div>
           </div>
         </div>

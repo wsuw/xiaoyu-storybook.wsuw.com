@@ -21,19 +21,17 @@ export const 公式定义: StoryObj = {
 export const 故事演练: StoryObj = {
   name: '2. 3D 故事与交互演练',
   argTypes: {
-    doorType: {
-      name: '门板材质类型 (0:实木, 1:玻璃铝框)',
+    hasDoor: {
+      name: '是否带门 (#HasDoor)',
       control: {
-        type: 'range',
-        min: 0,
-        max: 1,
-        step: 1,
+        type: 'inline-radio',
       },
-      description: '门板材质类型 (0:实木, 1:玻璃铝框)，在 Storybook Controls 中实时修改此值即可驱动 3D 变化',
+      options: [0, 1],
+      description: '1 代表带门封闭柜（#HasDoor == 1 为真），0 代表开放式展示书架（#HasDoor == 1 为假）',
     },
   },
   args: {
-    doorType: 1,
+    hasDoor: 1,
   },
   render: (args) => <EqNeqStoryScene {...args} />,
 };

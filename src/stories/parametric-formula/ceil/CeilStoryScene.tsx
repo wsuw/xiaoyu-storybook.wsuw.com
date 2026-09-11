@@ -13,19 +13,23 @@ const CeilMesh: React.FC<CeilStorySceneProps> = ({
     const count = Math.ceil(h / 400);
     const scaleH = h / 1000;
     const step = scaleH / count;
+    const shelfThick = 0.05;
+    // 侧板总高度：层板最低处在 0.3 - scaleH / 2 - shelfThick / 2，最高处在 0.3 + scaleH / 2 + shelfThick / 2
+    // 侧板高度设为 scaleH + shelfThick，完全包裹/覆盖上下层板
+    const sideH = scaleH + shelfThick;
     return (
       <group position={[0, -0.3, 0]}>
         <mesh position={[-0.8, 0.3, 0]}>
-          <boxGeometry args={[0.06, scaleH, 0.8]} />
-          <meshStandardMaterial color="#64748b" metalness={0.7} />
+          <boxGeometry args={[0.06, sideH, 0.8]} />
+          <meshStandardMaterial color="#1e293b" metalness={0.5} roughness={0.4} />
         </mesh>
         <mesh position={[0.8, 0.3, 0]}>
-          <boxGeometry args={[0.06, scaleH, 0.8]} />
-          <meshStandardMaterial color="#64748b" metalness={0.7} />
+          <boxGeometry args={[0.06, sideH, 0.8]} />
+          <meshStandardMaterial color="#1e293b" metalness={0.5} roughness={0.4} />
         </mesh>
         {Array.from({ length: count + 1 }).map((_, i) => (
           <mesh key={i} position={[0, 0.3 - scaleH / 2 + i * step, 0]}>
-            <boxGeometry args={[1.54, 0.05, 0.78]} />
+            <boxGeometry args={[1.54, shelfThick, 0.78]} />
             <meshStandardMaterial color="#06b6d4" metalness={0.3} roughness={0.3} />
           </mesh>
         ))}

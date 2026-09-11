@@ -53,11 +53,12 @@ export const AllInDefinition: React.FC<AllInDefinitionProps> = () => {
             boxShadow: '0 4px 12px -2px #0284c715',
           }}
         >
-          AllIn(#Selected, [0, 1, 2])
+          AllIn(#Selected, [1, 2, 3])
         </div>
       </div>
 
       <div style={{ flex: 1, padding: '32px', background: '#f8fafc', display: 'flex', flexDirection: 'column', gap: '24px', overflowY: 'auto' }}>
+        {/* 1. 公式标准原型与直白通俗解释 */}
         <div
           style={{
             background: '#ffffff',
@@ -83,20 +84,21 @@ export const AllInDefinition: React.FC<AllInDefinitionProps> = () => {
               marginBottom: '16px',
             }}
           >
-            AllIn(#Selected, [0, 1, 2])
+            AllIn(#Selected, [1, 2, 3])
           </div>
+
           <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', fontSize: '14px', lineHeight: '1.8', color: '#334155' }}>
             <p style={{ margin: 0 }}>
-              <strong>通俗一句话：</strong> <strong>“集合全包含检查（必须全部拥有）：检测用户所选的项目集合是否全部包含了指定的目标清单。例如当客户在电器高柜中同时选配了 0号蒸箱、1号烤箱、2号洗碗机 这三件重载电器时，必须自动在柜内生成一体化金属承重支架与贯通式背部导热通风烟道。”</strong>
+              <strong>通俗一句话：</strong> <strong>“集合全包含检查（子集必须全在，多选不影响）：检测用户所选的配置清单是否「全部包含了」三大核心重载项 [1-悬空无地脚, 2-大理石岩板厚台面, 3-双人双台盆]。只要这三项都在，哪怕客户额外加配了智能镜柜和感应夜灯，系统强制在柜底预埋 3 组入墙加厚镀锌三角悬挑钢架，坚决杜绝柜体下坠脱落事故。”</strong>
             </p>
             <p style={{ margin: 0, color: '#475569' }}>
               <strong>参数含义解析：</strong>
               <br />
-              • <code>#Selected</code>：当前选中的项目 ID 数组集合（例如 <code>[0, 1, 2, 4]</code>）。
+              • <code>#Selected</code>：用户实际选配的项目编号数组（如 <code>[1, 2, 3, 4, 5]</code>）。
               <br />
-              • <code>[0, 1, 2]</code>：待校验的目标必备项基准列表（必须全部都在 <code>#Selected</code> 中）。
+              • <code>[1, 2, 3]</code>：必须全部覆盖的高危力学组合（1:悬空壁挂无脚，2:大理石岩板厚台面，3:双人双台盆满载自重）。
               <br />
-              • 返回值：布尔值 <code>true</code> 或 <code>false</code>。只要缺哪怕任何一项，即返回 <code>false</code>。
+              • <code>AllIn(A, B)</code>：超集全包含判断（即 $B \subseteq A$）。只要 $B$ 中每一个项目都在 $A$ 中即为 <code>true</code>；只要缺少任何 1 项即为 <code>false</code>。
             </p>
           </div>
         </div>
@@ -115,35 +117,49 @@ export const AllInDefinition: React.FC<AllInDefinitionProps> = () => {
           <h4 style={{ margin: '0 0 14px 0', fontSize: '16px', color: '#0f172a', display: 'flex', alignItems: 'center', gap: '8px' }}>
             🔢 直观计算举例（带入真实数字）
           </h4>
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '16px' }}>
             <div style={{ background: '#f8fafc', padding: '16px', borderRadius: '8px', border: '1px solid #e2e8f0' }}>
-              <div style={{ fontWeight: 700, color: '#0f172a', marginBottom: '8px' }}>情况 A：用户选配 #Selected = [0, 1, 2, 3]（满配四件套）</div>
+              <div style={{ fontWeight: 700, color: '#0f172a', marginBottom: '8px' }}>情况 A：选配 [1, 2, 3, 4, 5]（顶配超集）</div>
               <div style={{ fontSize: '13px', color: '#475569', lineHeight: '1.8' }}>
-                • 目标基准：<code>[0, 1, 2]</code>
+                • 必查三大件：<code>1, 2, 3</code> 全在集合中
                 <br />
-                • 校验过程：0 在集合中、1 在集合中、2 也在集合中，<strong>全部命中</strong>
+                • 额外加配：4-智能除雾镜、5-感应夜灯
                 <br />
-                • AllIn 返回：<strong>True</strong>
+                • AllIn 判定：<strong>True（全包含超集成立）</strong>
                 <br />
-                • 柜体响应：总发热量巨大且自重超过 80kg，自动在柜体后方生成贯通强排导风槽，底板升级为加厚钢底座。
+                • 动作：<strong>虽然多加了小件，但三大重载要素已齐聚</strong>，必须立即在底盘预埋 3 组入墙加厚三角悬挑钢架与植筋螺栓！
               </div>
             </div>
 
             <div style={{ background: '#f8fafc', padding: '16px', borderRadius: '8px', border: '1px solid #e2e8f0' }}>
-              <div style={{ fontWeight: 700, color: '#0f172a', marginBottom: '8px' }}>情况 B：用户选配 #Selected = [0, 2]（仅选了蒸箱和洗碗机）</div>
+              <div style={{ fontWeight: 700, color: '#0f172a', marginBottom: '8px' }}>情况 B：选配 [1, 2, 3]（基础重载三件刚好齐备）</div>
               <div style={{ fontSize: '13px', color: '#475569', lineHeight: '1.8' }}>
-                • 目标基准：<code>[0, 1, 2]</code>
+                • 必查三大件：<code>1, 2, 3</code> 一个不少
                 <br />
-                • 校验过程：缺少 1 号烤箱（未全部包含）
+                • 额外加配：无
                 <br />
-                • AllIn 返回：<strong>False</strong>
+                • AllIn 判定：<strong>True（全包含）</strong>
                 <br />
-                • 柜体响应：无需触发最高等级的贯通三层散热风道，按常规局部隔热板处理，降低五金工艺和柜体成本。
+                • 动作：同样启动悬挑钢梁防下坠工艺，守住安全底线。
+              </div>
+            </div>
+
+            <div style={{ background: '#f8fafc', padding: '16px', borderRadius: '8px', border: '1px solid #e2e8f0' }}>
+              <div style={{ fontWeight: 700, color: '#0f172a', marginBottom: '8px' }}>情况 C：选配 [2, 3, 4, 5]（选了落地有脚支撑，漏了1-悬空）</div>
+              <div style={{ fontSize: '13px', color: '#475569', lineHeight: '1.8' }}>
+                • 必查三大件：缺 1-悬空（柜体已落地有脚）
+                <br />
+                • 额外加配：选了 4 与 5
+                <br />
+                • AllIn 判定：<strong>False（未全包含）</strong>
+                <br />
+                • 动作：地面立腿已承担大部分垂直下压力，无需预埋昂贵的重型三角悬挑钢架，按常规安装降低安装造价。
               </div>
             </div>
           </div>
         </div>
 
+        {/* 3. 应用场景与工程价值 */}
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '24px' }}>
           <div
             style={{
@@ -156,12 +172,12 @@ export const AllInDefinition: React.FC<AllInDefinitionProps> = () => {
             }}
           >
             <h4 style={{ margin: '0 0 12px 0', fontSize: '16px', color: '#0f172a' }}>
-              🎯 这个公式可以用来做什么？
+              🎯 这个公式在全屋定制中用来做什么？
             </h4>
             <ul style={{ margin: 0, paddingLeft: '20px', fontSize: '14px', lineHeight: '1.9', color: '#334155' }}>
-                <li>电器套餐成套检测，当必要设备齐集时自动增加散热排风道与承重架；</li>
-                <li>复杂组合定制家具中，判断多模块同时存在的联动结构保护；</li>
-                <li>多选列表下的高阶条件约束。</li>
+              <li><strong>高危悬空结构兜底</strong>：悬空+厚石材+宽大跨度同时出现时，强制介入工业级钢梁支撑；</li>
+              <li><strong>与 <code>BoolAt</code> 的本质区别</strong>：<code>BoolAt</code> 只能全等命中，而 <code>AllIn</code> 允许客户自由多选升级，只要包含核心子集即触发安全兜底；</li>
+              <li><strong>杜绝墙体撕裂事故</strong>：解决大理石悬空台盆因重力力臂下沉导致瓷砖破裂、管道拉脱漏水的行业大痛点。</li>
             </ul>
           </div>
 
@@ -179,9 +195,8 @@ export const AllInDefinition: React.FC<AllInDefinitionProps> = () => {
               💡 建模核心作用与工程价值
             </h4>
             <p style={{ margin: '0 0 12px 0', fontSize: '14px', lineHeight: '1.8', color: '#334155' }}>
-              校验多元件集合依赖关系，一旦满足全部必备配置，立刻激活关联的加固构件或强化工艺。
-            </p
-            >
+              <code>AllIn</code> 守护的是“高阶工况的充分性条件”。它让参数化设计系统在面对成百上千种个性化选配排列组合时，能够精准锚定真正危险的关键因子交集，实现精益制造与结构安全的绝佳平衡。
+            </p>
             <div
               style={{
                 fontSize: '13px',
@@ -192,7 +207,7 @@ export const AllInDefinition: React.FC<AllInDefinitionProps> = () => {
                 fontWeight: 500,
               }}
             >
-              ✦ 场景示范：高端厨电三件套与重载底座（可在左侧切换进入【2. 3D 故事与交互演练】实时调节参数驱动模型）
+              ✦ 场景示范：高定悬空卫浴柜三角承重钢架（可在 3D 交互演练中自由组合 5 项配置体验）
             </div>
           </div>
         </div>

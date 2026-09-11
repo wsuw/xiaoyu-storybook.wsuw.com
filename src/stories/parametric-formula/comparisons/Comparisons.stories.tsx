@@ -21,19 +21,19 @@ export const 公式定义: StoryObj = {
 export const 故事演练: StoryObj = {
   name: '2. 3D 故事与交互演练',
   argTypes: {
-    w: {
-      name: '浴室柜宽 (#W)',
+    h: {
+      name: '吊柜离地净高 (#H)',
       control: {
         type: 'range',
-        min: 400,
-        max: 750,
+        min: 1350,
+        max: 1750,
         step: 25,
       },
-      description: '浴室柜宽 (#W)，在 Storybook Controls 中实时修改此值即可驱动 3D 变化',
+      description: '吊柜离地安装高度 (#H)，人体工学安全红线 1550mm：>=1550 安全放行，<1550 碰头警报',
     },
   },
   args: {
-    w: 500,
+    h: 1600,
   },
   render: (args) => <ComparisonsStoryScene {...args} />,
 };
